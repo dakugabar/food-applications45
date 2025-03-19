@@ -1,0 +1,205 @@
+.login-popup {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6;
+}
+
+.login-popup-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  max-width: 90%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-popup-title img {
+  cursor: pointer;
+}
+
+.login-popup-inputs {
+  margin: 15px 0;
+}
+
+.country-code-dropdown {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.country-code-dropdown select {
+    font-size: 14px;
+  margin-right: 10px;
+  border: 1px solid tomato;
+  padding: 7px;
+}
+
+.mobile-number-input input,
+.otp-input input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+p.otp-expiry-info{
+  font-size: 12px;
+    margin-top: 10px;
+}
+span.icon.success-icon{
+  margin-top: 10px;
+  
+}
+
+.button-container {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container button {
+  padding: 10px 15px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container button:disabled {
+  background-color: #ccc;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.spinner {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid tomato;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.resend-otp .request-again {
+  color: #007bff; /* Primary color for clickable text */
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 3px;
+ 
+  
+
+}
+
+
+.otp-input input:focus {
+  border-color: tomato; /* Optional: Highlight border when focused */
+}
+
+.otp-input input::placeholder {
+  font-size: 18px;
+  color: gray; /* Adjust placeholder color */
+  letter-spacing: 5px; /* Add spacing to match the placeholder style */
+}
+
+                
+.mobile-number-input {
+  border: 1px solid gray; /* Default border color */
+  border-radius: 4px; /* Rounded corners */
+  /* Space inside the container */
+  transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+.mobile-number-input input {
+  border: none; /* Remove input's default border */
+  outline: none; /* Remove default focus outline */
+  /* Font size for input text */
+}
+
+.mobile-number-input:focus-within {
+  border-color:tomato; /* Change border color to red on focus */
+}
+
+.mobile-number-input input:focus{
+  border-color: tomato;
+}
+.otp-input input:focus {
+  border-color: tomato; /* Border color when focused */
+}
+.resend-otp {
+  font-size: 0.9rem;
+  color: #555; /* Muted text color */
+  margin: 0;
+  margin-top: 10px;
+  
+}
+
+
+.resend-otp .request-again:hover {
+  color: #0056b3; /* Darker shade on hover */
+ text-decoration: none;
+}
+
+/* Disable interaction if resend is on cooldown */
+.resend-otp .request-again[disabled] {
+  color: #aaa;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.otp-input {
+  margin-top: 10px;
+  position: relative;
+}
+
+.otp-input input {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 4px; /* Adds spacing between characters (dots effect) */
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.otp-input input:focus {
+  border-color: tomato;
+  outline: none;
+}
+
+.otp-input input[type="password"] {
+  letter-spacing: normal; /* Dots when the input type is password */
+}
+
+.otp-input input[type="text"] {
+  letter-spacing: normal; /* Show the numbers when focused */
+}
+img.login-cross:hover {
+  transform: scale(1.5);
+}
+
+.otp-input input::placeholder {
+  font-size: 24px; /* Adjust this value to change the dot size */
+  letter-spacing: 4px; /* Keep the spacing between the dots */
+}

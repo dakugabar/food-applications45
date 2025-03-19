@@ -1,0 +1,363 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.order-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.location-icon {
+  color: #ff6347;
+  font-size: 28px;
+}
+
+.location-icon1 {
+  color: #ff6347;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.add-new-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  color:#007bff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+
+/* Saved Address List */
+.address-list {
+  margin-top: 20px;
+}
+
+.address-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  /* background-color: #f9f9f9; */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 10px;
+  border-bottom: 0.5px solid #ddd;
+}
+span.add-new:hover{
+ text-decoration: underline;
+
+}
+
+/* .address-item:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+} */
+
+.address-item input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #fb641b;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+  margin-bottom: 0px;
+}
+
+.address-item input[type="radio"]:checked::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #fb641b;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.address-item span {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Popup Styles */
+.popup-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  z-index: 3000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.popup {
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  height: auto; /* Adjust height to fit content */
+  transform: translateX(100%);
+}
+
+.popup-container .popup {
+  transform: translateX(0);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Adjusted for spacing */
+}
+
+.popup-header h3 {
+  font-size: 20px;
+  color: #333;
+  margin: 0;
+}
+
+.remove-icon {
+  color: #555;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.remove-icon:hover {
+  color: #ff6347;
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.input-field1 {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.input-field:focus,
+.input-field1:focus {
+  outline: none;
+  border-color: #ff6347;
+}
+
+.save-address-btn {
+  width: 100%;
+  background-color: #ff6347;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.locate-me-btn {
+  width: 40%; /* Adjusted to full width */
+  background-color: #fff;
+  color: #ff6347;
+  padding: 12px;
+  border: 1px solid #ff6347;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+}
+
+
+.save-address-btn:hover {
+  background-color: #e5533d;
+}
+.locate-me-btn:hover{
+  background-color: tomato;
+  color: white;
+}
+
+.not-deliverable {
+  color: #fb641b;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.locate {
+  display: flex;
+}
+
+/* Error Message Styles */
+.error-message {
+  color: tomato;
+  font-size: 16px; /* Slightly larger text */
+  text-align: center; /* Center-align the text */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .order-container {
+    padding: 10px;
+  }
+  .cart-bottom1{
+    margin-top: 30px;
+  }
+
+  .address-header {
+    font-size: 20px;
+  }
+
+  .location-icon, .location-icon1 {
+    font-size: 24px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .popup-header h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-header {
+    font-size: 18px;
+    gap: 5px;
+  }
+  .cart-bottom1{
+    margin-top: 30px;
+  }
+
+  .location-icon, .location-icon1 {
+    font-size: 20px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .popup-header h3 {
+    font-size: 16px;
+  }
+
+  .add-new-btn {
+    font-size: 14px;
+  }
+
+  .input-field, .input-field1 {
+    font-size: 14px;
+  }
+
+  .save-address-btn, .locate-me-btn {
+    font-size: 14px;
+  }
+}
+/* General error text styling */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Input field border when there's an error */
+
+
+/* Optional: Add some padding or margin to position the error text correctly */
+
+
+/* Example of how the error message can be aligned */
+.locate .error-text {
+  margin-left: 10px;
+  display: block;
+}
+
+.save-address-btn {
+  padding: 10px 20px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.save-address-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 4px solid transparent;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+

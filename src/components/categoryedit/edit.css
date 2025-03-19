@@ -1,0 +1,139 @@
+/* Popup overlay styling */
+.popup-overlay-category {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 10000;
+
+  }
+  
+  /* Popup container styling */
+  .popup-container-category  {
+    background-color: #fff;
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  /* Image upload preview */
+  .category-image-preview {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect for image preview */
+  .image-upload-label2:hover .category-image-preview {
+    opacity: 0.8;
+  }
+  
+  /* Input field styling */
+  .popup-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .popup-input:focus {
+    border-color: tomato; /* Border color changes when input is focused */
+  }
+  
+  /* Label styling for category name */
+  .popup-input + label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Buttons styling */
+  .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .popup-close-btn,
+  .popup-update-btn {
+    background-color:tomato;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .popup-close-btn {
+    background-color: #949191;
+  }
+  .popup-close-btn:hover{
+    background-color: #7a7777;
+  }
+  
+  
+  .popup-update-btn:hover {
+    background-color: tomato; /* Darker green on hover */
+  }
+  
+  .popup-update-btn:disabled {
+    background-color: #bbb; /* Disabled button color */
+    cursor: not-allowed;
+  }
+  
+  /* Animation for popup visibility */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Slide-in animation for popup container */
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-30px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .popup-container-category  {
+      width: 90%;
+    }
+  
+    .popup-input {
+      font-size: 14px;
+    }
+  
+    .category-image-preview {
+      height: 150px;
+    }
+  }
+  

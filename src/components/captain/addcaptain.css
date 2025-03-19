@@ -1,0 +1,193 @@
+.captain-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  /* Add Captain Button Loading Effect */
+
+
+.add-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.add-button.loading::after {
+  content: "";
+  position: absolute;
+ 
+  animation: spin 0.6s linear infinite;
+}
+
+/* Loading Indicator for Fetching Data */
+.loading-indicator {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+  color:tomato;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+  
+  .title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .input-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  .input-box {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .input-box:focus {
+    border-color:tomato;
+    outline: none;
+  }
+  
+  .add-button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: tomato;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .add-button:hover {
+    background: rgb(245, 63, 30);
+  }
+  
+  /* Captain List *
+   */
+.table-container {
+  max-width: 700px;
+  margin: 5px auto;
+  margin-top: 30px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Captain List */
+.captain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 270px; /* 4 items visible */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color:#e94a5a  #f1f1f1;
+}
+
+.captain-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.captain-list::-webkit-scrollbar-thumb {
+  background: tomato;
+  border-radius: 10px;
+}
+
+.captain-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin: 5px 0;
+  background: #f8f9fa;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+
+
+.button-group2 {
+  display: flex;
+  gap: 20px;
+}
+
+.edit-btn2, .delete-btn2 {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-top: 0px;
+}
+
+.edit-btn2 {
+  background: tomato;
+  color: white;
+}
+
+.edit-btn2:hover {
+  background: #dc3545;
+}
+
+.delete-btn2 {
+  background: tomato;
+  color: white;
+}
+
+.delete-btn2:hover {
+  background: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .captain-container, .table-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .input-box {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .add-button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .captain-item {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .button-group2 {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

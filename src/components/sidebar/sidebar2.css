@@ -1,0 +1,142 @@
+.container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent overflow on the container */
+}
+.sidebar-option:hover svg {
+    stroke: white;
+  }
+
+  .sidebar-option svg {
+    stroke: black;
+  }
+  
+/* Sidebar styling */
+.sidebar {
+    width: 18%;
+    height: 100vh; /* Full height */
+    background-color: #f8f9fa; /* Light background */
+    border-right: 2px solid #dcdcdc; /* Soft border */
+    font-size: max(1vw, 12px); /* Adjusted font size */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: fixed; /* Fixed sidebar */
+    top: 60px;
+    left: 0;
+    overflow-y: auto; /* Scroll only when content exceeds height */
+    z-index: 1000;
+    transition: width 0.3s ease-in-out; /* Smooth transition for width */
+}
+.sidebar::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    background: transparent; /* Optional: Hide scrollbar track */
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .sidebar {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  }
+
+
+
+.sidebar-options {
+    padding-top: 7px !important;
+    padding-left: 15%; /* Adjusted padding for better alignment */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduced gap for compact look */
+    margin-top: 0;
+    
+
+}
+
+.sidebar-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    border-radius: 5px 0px 0px 5px;
+    cursor: pointer;
+    background-color: #ffffff; /* White background for options */
+    border: 1px solid #dcdcdc; /* Softer border */
+    border-right: 0;
+    transition: all 0.3s ease; 
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.sidebar-option:hover {
+    background-color: tomato; /* Change background color on hover */
+    color: #ffffff; /* Text color on hover */
+    transform: translateX(5px); /* Subtle shift on hover */
+    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1); 
+   
+}
+
+.sidebar-option p {
+    margin: 0;
+    font-weight: 500; 
+    font-family: Arial, Helvetica, sans-serif;
+    color: black; 
+}
+
+.sidebar-option img {
+    width: 24px;
+    height: 24px;
+    filter: grayscale(1); /* Grayscale icons for a sleek look */
+    transition: filter 0.3s ease;
+}
+.icon1{
+    width: 24px;
+    height: 24px;
+    filter: grayscale(1); /* Grayscale icons for a sleek look */
+    transition: filter 0.3s ease;
+}
+.icon1:hover{
+    filter: none;
+}
+
+.sidebar-option:hover img {
+    filter: none; /* Restore color on hover */
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 60px; /* Compact width for smaller screens */
+    }
+
+    .sidebar-option p {
+        font-size: 8px;
+        text-align: center;
+    }
+
+    .sidebar-options {
+        padding-left: 10%;
+    }
+
+    .sidebar-option {
+        display: inline-block;
+        justify-content: center; /* Center icon in compact view */
+        padding: 12px;
+    }
+    .space-bottom{
+        margin-bottom: 80px;
+      }
+
+    .sidebar-option img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+  
+  .sidebar-option .active img {
+    filter: brightness(0) invert(1);
+  }
+  .sidebar-option.active {
+    background-color:tomato;
+    font-weight: bold;
+  }
+  .space-bottom{
+    margin-bottom: 65px;
+  }

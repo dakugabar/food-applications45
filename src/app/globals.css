@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Outfit;
+  scroll-behavior: smooth;
+}
+body{
+  min-height: 100vh;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.app{
+  width: 80%;
+  margin: auto;
+}
+@keyframes fadeIn{
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+ .navbar-fixed {
+  position: fixed;
+  top: 0;
+  
+  width: 80%;
+  z-index: 2; 
+  background-color: #fff;
+  
+
+} 
+.app{
+  padding-top: 60px;
+}
+.back-navbar{
+  background-color: #fff;
+  z-index: 5;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+}
+@media (max-width: 768px) {
+  .app {
+    padding-top: 30px;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 480px) {
+  .app {
+   padding-top: 10px;
+  }
+
+
+
+  /* Additional styling for text, images, or buttons as needed */
+  .my-orders-order p {
+    font-size: 14px;
+  }
+
+  .my-orders-order button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+

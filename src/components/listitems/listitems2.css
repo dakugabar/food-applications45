@@ -1,0 +1,235 @@
+/* Container Styles */
+.list {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Title Styles */
+  .list p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+  }
+  
+  /* Table Styles */
+  .list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Grid Layout for Table */
+  .list-table-format1 {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr   1fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Title Row Styling */
+  .list-table-format1.title {
+    font-weight: bold;
+    background-color: #f4f4f4;
+    border-top: 2px solid tomato;
+    text-align: center;
+  }
+  .loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+  /* Cell Styling */
+  .list-table-format1 .image,
+  .list-table-format1 .name,
+  .list-table-format1 .category,
+  .list-table-format1 .price,
+  .list-table-format1 .discount,
+  .list-table-format1 .action-edit,
+  .list-table-format1 .cursor {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    color: lightslategray;
+  }
+  .list-table-format1 b{
+    color: slategray;
+  }
+  
+  .list-table-format1 .image {
+    max-width: 80px;
+    height: auto;
+    border-radius: 5px;
+    margin: 0;
+  }
+  
+  .name, .category, .price, .discount {
+    padding: 10px;
+  }
+  
+  /* Button Styles */
+  .edit-button-list {
+    background-color: tomato;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 6px !important;
+  }
+  
+  .edit-button-list:hover {
+    background-color: rgb(247, 45, 10);
+  }
+  
+  /* Cursor Styles */
+  .cursor {
+    cursor: pointer;
+  }
+  
+  .cursor img {
+    margin-top: 10px;
+    width: 25px;
+    height: 25px;
+  }
+  .cursor img:hover{
+transform: scale(1.5);
+  }
+  
+  /* Popup Styles */
+  .EditPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .EditPopup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .EditPopup-content h2 {
+    margin: 0 0 15px;
+  }
+  
+  .EditPopup-content button {
+    background-color: rgb(240, 45, 11);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .EditPopup-content button:hover {
+    background-color: rgb(250, 51, 16);
+  }
+  
+  .EditPopup-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+  }
+  .list-item-title{
+    text-align: center;
+  }
+  .list-item-title p{
+    color: tomato;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .list-table-format1 {
+      grid-template-columns: 1fr 2fr 1fr 1fr ;
+      gap: 5px;
+      text-align: center;
+    }
+  
+    .list-table-format1.title {
+      font-size: 0.9em;
+      
+    }
+  
+    .list-table-format1 .image {
+      max-width: 60px;
+    }
+  
+    .name, .category, .price, .discount {
+      padding: 5px;
+      font-size: 0.9em;
+    }
+  
+    .edit-button-list {
+      padding: 5px;
+      font-size: 0.9em;
+    }
+  
+    .cursor img {
+      width: 18px;
+      height: 18px;
+
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .list-table-format1 {
+      grid-template-columns: 1fr 1fr ;
+      text-align: center;
+      grid-template-rows: auto auto auto auto auto auto auto;
+    }
+    .list p{
+      text-align: center;
+    }
+  
+    .list-table-format1 .image {
+      max-width: 80px;
+    }
+  
+    .name, .category, .price, .discount {
+      font-size: 0.8em;
+      padding: 5px;
+    }
+  
+    .edit-button-list, .cursor {
+      font-size: 0.8em;
+    }
+  }
+  

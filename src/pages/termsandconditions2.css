@@ -1,0 +1,72 @@
+/* components/TermsAndConditions/TermsAndConditions.css */
+.terms-container {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    margin-top: 30px;
+  }
+  
+  .terms-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .terms-header h1 {
+    font-size: 32px;
+    color: #333;
+  }
+  
+  .terms-header p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .terms-content h2 {
+    font-size: 24px;
+    color: #444;
+    margin-top: 20px;
+  }
+  
+  .terms-content p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .terms-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .terms-content ul li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .terms-container {
+      padding: 15px;
+      margin-top: 90px;
+    }
+  
+    .terms-header h1 {
+      font-size: 28px;
+    }
+  
+    .terms-content h2 {
+      font-size: 20px;
+    }
+  
+    .terms-content p, .terms-content ul li {
+      font-size: 14px;
+    }
+  }
+  

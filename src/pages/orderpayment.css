@@ -1,0 +1,174 @@
+/* Ensure the body has some default margin */
+body {
+    margin: 0;
+  }
+  
+  /* Wrapper to center the content and handle responsiveness */
+ 
+  
+  /* Container for the order payment section */
+  .order-payment-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    overflow: hidden;
+    /* Add responsive handling for smaller screens */
+    flex-direction: row;
+    margin-top: 60px;
+    
+  }
+  
+  /* Fixed column for payment options */
+  .column.options-column {
+    width: 300px;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    height: auto; /* Full viewport height */
+    overflow-y: auto; /* Scroll if necessary */
+  }
+  
+  .options-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+ 
+  
+  span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+   .option-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .option-item:hover {
+    background-color: #f0f0f0;
+  }
+  .option-item.selected{
+    background-color: #f0f0f0;
+    margin-top: 5px;
+  }
+  
+  
+  .option-item.selected  .circle{
+    background-color:tomato;
+    border: 2px dotted tomato;
+ 
+  }
+  
+  .option-item .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid tomato;
+    margin-right: 10px;
+    
+  } 
+  
+  .details-column {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .payment-details {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .payment-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .payment-input {
+    width: 90%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .submit-button1 {
+    display: block;
+    
+    padding: 15px;
+    background-color: #fb641b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px ;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button1:hover {
+    background-color: rgb(250, 43, 7);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .order-payment-container {
+      flex-direction: column;
+    }
+  
+    .column.options-column {
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .details-column {
+      padding: 20px;
+    }
+  }
+  .download-link {
+    display: inline-block;
+ font-size: 16px;
+   color: black;
+    text-decoration: none;
+    border-bottom: 1px dotted tomato;
+  }
+  .download{
+    text-align: center;
+   color: blue;
+  }
+  
+  .download-link:hover {
+   border: none;
+    color: tomato;
+  }
+  .input-error {
+    border: 1px solid red;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  
+  
+  

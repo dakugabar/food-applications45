@@ -1,0 +1,112 @@
+.review-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+ 
+
+.review-popup-content {
+  background-color: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh; /* Limits the height of the popup */
+  overflow-y: auto;  /* Enables scrolling when content exceeds max-height */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+  -ms-overflow-style: none;
+  border-radius:10px ;
+    /* Hides scrollbar for Internet Explorer */
+}
+
+.review-popup-content::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for Chrome, Safari, and Edge */
+}
+  
+.popup-header{
+  display: flex;
+  justify-content: space-between;
+  
+}
+  
+  .popup-title {
+    margin: 0; /* Remove margin for the title */
+    font-size: 1.5rem; /* Title font size */
+    color: #333; /* Title color */
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    color: #ff5733; /* Close icon color */
+    font-size: 1.5rem; /* Close icon size */
+  }
+  
+  .food-items, .delivery-item {
+    margin-bottom: 15px; /* Space below the items */
+  }
+  
+  .restaurant-review-title, .delivery-review-title {
+    font-size: 1.2rem; /* Review title size */
+    color: #555; /* Review title color */
+    margin-bottom: 10px; /* Space below the title */
+  }
+  hr{
+    color: #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .food-item, .delivery-item {
+    display: flex;
+    justify-content: space-between; /* Align food item and stars */
+    align-items: center; /* Center align items */
+    margin: 5px 0; /* Space between items */
+  }
+  
+  .star-rating {
+    display: flex; /* Align stars in a row */
+  }
+  
+  .star {
+    font-size: 30px;
+    cursor: pointer;
+    color: grey; /* Default star color */
+    transition: color 0.3s; /* Smooth transition for color change */
+  }
+  
+  .star.filled {
+    color: tomato; /* Filled star color */
+  }
+  
+  .review-textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc; /* Textarea border color */
+    border-radius: 5px; /* Textarea border radius */
+    font-size: 1rem; /* Textarea font size */
+  }
+  
+  .submit-button {
+    background-color: tomato; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 15px; /* Button padding */
+    border-radius: 5px; /* Button border radius */
+    font-size: 1rem; /* Button font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+    display: block; /* Center button */
+    margin: 0 auto; /* Center the button */
+  }
+  
+  .submit-button:hover {
+    background-color:rgb(236, 40, 5); /* Darker green on hover */
+  }
+  

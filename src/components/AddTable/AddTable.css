@@ -1,0 +1,232 @@
+/* General Reset */
+
+/* Add Table Container */
+.add-table-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 0.5px solid lightgray;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.form-title {
+  font-family: math;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  background-color: tomato;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  /* margin-left: 50px;
+  margin-right: 50px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Form Styling */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: gray;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  border-color: tomato;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(233, 38, 4, 0.2);
+}
+
+.input:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit Button */
+.btn-submit {
+  padding: 15px;
+  font-size: 16px;
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-group1 {
+  text-align: center;
+}
+
+.btn-submit:hover {
+  background-color: rgb(233, 38, 4);
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-table-container {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .form-title {
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-submit {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .form-group {
+    gap: 15px;
+  }
+}
+
+/* Mobile Animation Enhancement */
+@media (max-width: 480px) {
+  .add-table-container {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .form-title {
+    font-size: 18px;
+  }
+
+  .input {
+    padding: 6px;
+  }
+
+  .btn-submit {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+/* Toast Container */
+.Toastify__toast-container {
+  z-index: 1055; /* Ensure it appears above other elements */
+  font-family: Arial, sans-serif;
+}
+
+/* Top-Right Position */
+.Toastify__toast-container--top-right {
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Toast Notifications */
+.Toastify__toast {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Success Toast */
+.Toastify__toast--success {
+  /* Green */
+  color: #218838;
+  border: 1px solid #218838;
+}
+
+/* Error Toast */
+.Toastify__toast--error {
+  /* Red */
+  color: #c82333;
+  border: 1px solid #c82333;
+}
+
+/* Info Toast */
+.Toastify__toast--info {
+   /* Blue */
+  color: #117a8b;
+  border: 1px solid #117a8b;
+}
+
+/* Warning Toast */
+.Toastify__toast--warning {
+   /* Yellow */
+  color: black;
+  border: 1px solid #e0a800;
+}
+
+/* Progress Bar */
+.Toastify__progress-bar {
+  background-color:#c82333; /* Default White */
+  height: 5px;
+}
+
+.Toastify__progress-bar--success {
+  background-color: #218838; /* Matches success color */
+}
+
+.Toastify__progress-bar--error {
+  background-color: #c82333; /* Matches error color */
+}
+
+.Toastify__progress-bar--info {
+  background-color: #117a8b; /* Matches info color */
+}
+
+.Toastify__progress-bar--warning {
+  background-color: #e0a800; /* Matches warning color */
+}
+
+/* Close Button */
+.Toastify__close-button {
+  color: black;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1;
+}
+
+

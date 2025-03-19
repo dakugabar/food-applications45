@@ -1,0 +1,197 @@
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .admin-navbar{
+    padding: 8px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:2px solid #e9e9e9  ;
+    margin-bottom: -18px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: white;
+}
+
+ .logo{
+    width: max(10%,100px);
+}
+.profile{
+    width: 40px;
+}
+.admin-navbar P{
+    font-family: Outfit;
+    font-size: 16px;
+    margin-top: 0px;
+   
+    
+}
+  
+  
+  .admin-panel-content {
+   
+    margin-top: 60px;
+    margin-left: 250px; /* Aligns with sidebar width */
+    padding: 20px;
+    /* Adjusts the content area width */
+    overflow-y: auto;
+    
+    
+  }
+  
+  .sidebar {
+    top: 75px;
+    
+    
+  }
+  
+  .admin-panel-right {
+    flex-grow: 1;
+    padding: 20px;
+  }
+
+ 
+
+.sidebar {
+  width: 18%;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Light background */
+  border-right: 2px solid #dcdcdc; /* Soft border */
+  font-size: max(1vw, 12px); /* Adjusted font size */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: width 0.3s ease-in-out; /* Smooth transition for width */
+}
+
+.sidebar-options {
+  padding-top: 50px;
+  padding-left: 15%; /* Adjusted padding for better alignment */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reduced gap for compact look */
+  margin-top: 0;
+}
+
+.sidebar-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  border-radius: 5px 0px 0px 5px;
+  cursor: pointer;
+  background-color: #ffffff; /* White background for options */
+  border: 1px solid #dcdcdc; /* Softer border */
+  border-right: 0;
+  transition: all 0.3s ease; 
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.sidebar-option:hover {
+  background-color: tomato; /* Change background color on hover */
+  color: #ffffff; /* Text color on hover */
+  transform: translateX(5px); /* Subtle shift on hover */
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1); 
+ 
+}
+
+.sidebar-option p {
+  margin: 0;
+  font-weight: 500; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: black; 
+}
+
+.sidebar-option img {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(1); /* Grayscale icons for a sleek look */
+  transition: filter 0.3s ease;
+}
+
+.sidebar-option:hover img {
+  filter: none; /* Restore color on hover */
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+      width: 60px; /* Compact width for smaller screens */
+  }
+  .admin-panel-content {
+    margin-left: 28px;
+    padding: 0px;
+  }
+
+  .sidebar-option p {
+      font-size: 8px;
+      text-align: center;
+  }
+
+  .sidebar-options {
+      padding-left: 10%;
+  }
+
+  .sidebar-option {
+    display: inline-block;
+      justify-content: center; /* Center icon in compact view */
+      padding: 12px;
+  }
+
+  .sidebar-option img {
+      width: 28px;
+      height: 28px;
+  }
+}
+.admin-navbar{
+  padding: 8px 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom:2px solid #e9e9e9  ;
+  margin-bottom: -10px;
+}
+
+.logo{
+  width: max(10%,100px);
+}
+.profile{
+  width: 40px;
+}
+.admin-navbar P{
+  font-family: Outfit;
+  font-size: 16px;
+  margin-top: 0px;
+ 
+  
+}
+hr{
+    
+  height: 2px;
+  background-color: #e2e2e2;
+  border: none;
+  margin-bottom: 0px;
+}
+.sidebar-option.active {
+  background-color: tomato;
+  color: #fff;
+}
+
+.sidebar-option.active img {
+  filter: brightness(0) invert(1);
+}
+.flex-col{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (max-width: 480px){
+  .admin-panel-right{
+    padding: 0px;
+    margin-left: 25px;
+  }
+}

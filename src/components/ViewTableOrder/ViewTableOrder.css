@@ -1,0 +1,240 @@
+/* Container styling */
+.table-container1 {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fade-in 0.5s ease-in-out;
+}
+
+/* Header styling */
+.table-header1 {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 3px;
+  text-align: center;
+  padding: 15px 20px;
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  
+}
+
+/* Body styling with scrolling */
+.table-body1 {
+  max-height: 315px; /* Height for 5 orders */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  
+}
+.table-body1::-webkit-scrollbar {
+  width: 10px; /* Adjust width for vertical scrollbar */
+}
+
+.table-body1::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light grey track */
+  border-radius: 10px;
+}
+
+.table-body1::-webkit-scrollbar-thumb {
+  background-color: #888; /* Darker grey thumb */
+  border-radius: 10px;
+  border: 2px solid #f1f1f1; /* Creates space around the thumb */
+}
+
+.table-body1::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker thumb on hover */
+}
+
+/* Adjust scrollbar for the container if needed */
+.table-container1::-webkit-scrollbar {
+  width: 12px;
+}
+
+.table-container1::-webkit-scrollbar-track {
+  background: #ddd;
+  border: 1px solid tomato;
+}
+
+.table-container1::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.table-container1::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+.table-row1 {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 3px;
+  text-align: center;
+  padding: 15px 20px;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  transition: background-color 0.3s ease;
+  
+}
+
+
+
+.table-row1 div {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Footer (bottom title) styling */
+.table-footer1 {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 15px 20px;
+  background-color:red;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Button styles */
+.btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.view-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading and error messages */
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+  
+}
+.status-dropdown {
+
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid tomato;
+  color: #f44336;
+}
+.btn.edit-btn:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+
+
+.status-done {
+  font-size: 16px;
+  color: green;
+  font-weight: bold ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #fff;
+}
+
+
+.done-icon {
+  color: green; /* Customize icon color */
+  margin-right: 5px; /* Space between the icon and the text */
+  font-size: 20px; /* Adjust the icon size */
+}
+
+
+
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .table-header1,
+  .table-row1,
+  .table-footer1 {
+    grid-template-columns: 40px 1fr 1fr 1fr 1fr 80px 80px 1fr;
+    font-size: 12px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header1,
+  .table-row1,
+  .table-footer1 {
+    grid-template-columns: repeat(4,1fr);
+    
+    font-size: 10px;
+  }
+
+  .btn {
+    font-size: 10px;
+    padding: 3px 7px;
+  }
+}
+

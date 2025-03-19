@@ -1,0 +1,155 @@
+.order-item{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    border: 1px solid tomato;
+    padding: 20px;
+    margin: 30px 0px;
+    font-size: 14px;
+    color: #505050;
+  
+
+}
+.mobile-icon {
+    font-size: 13px;
+    color: tomato; /* Elegant green */
+    margin-right: 5px;
+   
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .mobile-icon1{
+    font-size: 15px;
+    color: tomato; /* Elegant green */
+    margin-right: 5px;
+  }
+  
+ 
+  .mobile-number{
+    margin-bottom: 5px;
+  }
+
+.order-item-food .order-item-name{
+    font-weight: 600;
+
+}
+.order-item-name{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    
+
+}
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+.order-item-address{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.order-item select{
+    background-color: #ffe8e4;
+    border: 1px solid tomato;
+    width: max(14vw,120px);
+    padding:10px;
+    outline: none;
+}
+@media (max-width:768px){
+    .order-item{
+        font-size: 14px;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        padding: 15px 8px;
+    }
+    .order-item img{
+width: 40px;
+    }
+    .order-item select{
+        padding: 5px;
+        font-size: 12px;
+    }
+    .order-admin{
+        padding: 10px;
+        margin-left: 20px;
+    }
+}
+@media (max-width: 480px){
+    .order-item{
+        font-size: 14px;
+        grid-template-columns:  1fr;
+        padding: 15px 8px;
+        text-align: center;
+    }
+    .order-item select{
+        padding: 5px;
+        font-size: 12px;
+        text-align: center;
+    }
+    .order-admin{
+        padding: 10px;
+        margin-left: 20px;
+    }
+   
+    p.order-item-total-amount{
+        margin-top: -20px;
+    }
+}
+
+.refresh-icon {
+    font-size: 24px;
+    color: tomato;
+    transition: transform 0.3s ease;
+    
+  }
+  
+  .refresh-icon:hover {
+    transform: rotate(360deg);
+    color: rgb(235, 46, 12);
+  }
+  .refresh{
+    text-align: center;
+  }
+  .pdf-button {
+   
+    color: black;
+   
+    
+    
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #ffe8e4;
+    border: 1px solid tomato;
+    width: max(14vw,120px);
+    padding:7px;
+    outline: none;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  
+  .pdf-button:hover {
+    background-color: #fc9482;
+  }
+
+  
+  
+  
+  

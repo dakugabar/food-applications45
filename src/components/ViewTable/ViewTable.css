@@ -1,0 +1,209 @@
+/* General Styles */
+
+/* Table Container */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+
+/* Table Row */
+.table-row-order {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 equal columns */
+  gap: 20px;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Table Item */
+.table-item-order {
+  position: relative;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #555;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  width: 150px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.table-item-order:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f4f4f4;
+}
+
+.table-item-order.selected {
+  transform: scale(1.1);
+  background-color: #e6f7ff; /* Light blue for selected table */
+  border-color: #007bff;
+}
+
+.table-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  color: rgb(194, 65, 43);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* People Icon */
+.people-icon {
+  font-size: 40px;
+  color: gray;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1;
+}
+
+.table-item-order.selected .people-icon {
+  color: grey; /* Blue for selected table */
+}
+
+.table-item-order.occupied .people-icon {
+  color:aliceblue;
+}
+
+.table-item-order.reserved .people-icon {
+  color: white;
+}
+
+.table-item-order.available .people-icon {
+  color: grey;
+}
+
+
+
+.people-icon.selected-icon {
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .table-row-order {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .table-row-order {
+    grid-template-columns: repeat(5, 1fr); /* 2 columns on small screens */
+  }
+
+  .table-item-order {
+    font-size: 14px;
+    padding: 15px;
+    width: 120px;
+    height: 90px;
+  }
+  .people-icon {
+    font-size: 30px;
+  }
+
+  .table-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-row-order {
+    grid-template-columns: repeat(3, 1fr);
+    /* 1 column on very small screens */
+  }
+  .table-container{
+    margin: 0px 0px;
+  }
+ 
+
+  .table-item-order {
+    width: 100%;
+    font-size: 12px;
+    padding: 10px;
+    height: 80px;
+  }
+
+  .people-icon {
+    font-size: 25px;
+  }
+
+  .table-label {
+    font-size: 10px;
+  }
+}
+
+/* Specific Styles for Different Statuses */
+.table-item-order.occupied {
+  background-color: green;
+  border-color: darkgreen;
+}
+
+.table-item-order.reserved {
+  background-color: grey;
+  border-color: gray;
+}
+
+.table-item-order.available {
+  background-color: white;
+  border: 1px solid #ddd;
+  color: grey;
+}
+
+.table-item-order.selected {
+  background-color: #e6f7ff;
+  border-color: #007bff;
+}
+
+/* Add subtle glow effect for table icon */
+.table-item-order.selected .people-icon {
+  animation: glow 1s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #007bff, 0 0 10px #007bff, 0 0 15px #007bff;
+  }
+  50% {
+    text-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 30px #007bff;
+  }
+  100% {
+    text-shadow: 0 0 5px #007bff, 0 0 10px #007bff, 0 0 15px #007bff;
+  }
+}

@@ -1,0 +1,108 @@
+.my-orders{
+    margin: 74px 0px;
+}
+.my-orders .container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+.my-orders-order{
+    display: grid;
+    grid-template-columns:0.5fr 2.2fr 0.8fr 1fr 2fr 1fr 1fr 1fr ;
+    align-items: center;
+    gap: 30px;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: #454545;
+    border: 1px solid tomato;
+}
+.my-orders-order img{
+  width: 50px;  
+}
+.my-orders-order p span{
+    color: tomato;
+}
+.my-orders-order p b{
+    font-weight: 500;
+    color: #454545;
+}
+.my-orders-order button{
+    border: none;
+    padding: 12px 0px;
+    border-radius: 4px;
+    background-color: #ffe1e1;
+    cursor: pointer;
+    color: #454545;
+}
+.my-orders-order button:hover{
+    color: tomato;
+}
+@media (max-width:900px){
+    .my-orders-order{
+        grid-template-columns: 2fr 2fr 2.5fr;
+        row-gap: 5px;
+        font-size: 12px;
+    }
+    .my-orders-order button{
+        font-size: 10px;
+    }
+}
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    z-index: 1000;
+    color: #555;
+  }
+  
+  .back-arrow-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  @media (min-width: 1000px){
+    .back-arrow {
+       display: none; 
+    }
+  }
+  
+/* Add this CSS to your global stylesheet or to a specific CSS file */
+.popup.small-popup {
+    position: absolute;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    top: -50px; /* Adjust based on where you want the popup */
+    left: 0;
+    width: 250px;
+  }
+  
+  .popup.small-popup p {
+    margin: 0;
+  }
+  
+  .popup.small-popup button {
+    background-color: transparent;
+    border: none;
+    color: #721c24;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+  }
+  .tometo{
+    color: rgb(247, 40, 4);
+  }
+      
+  
+  .back-navbar{
+    background-color: #fff;
+    z-index: 5;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+  }
+  
+  

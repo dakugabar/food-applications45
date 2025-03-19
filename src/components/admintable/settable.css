@@ -1,0 +1,363 @@
+/* General Container */
+.settable-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Header */
+  .settable-header {
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: bold;
+    padding: 10px 20px;
+    background: tomato;
+    color: #fff;
+    border-radius:8px ;
+   
+  }
+  
+  /* Rows */
+  .settable-row {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px 20px;
+    border: 0.5px solid #ddd;
+    align-items: center;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .settable-row.even {
+    background: #f9f9f9;
+
+    
+  }
+  .top-second-title{
+    color: gray;
+  }
+  .settable-row.even:hover{
+    background-color: lightgray;
+  }
+  
+  .settable-row.odd {
+    background: #fff;
+  }
+  .settable-row.odd:hover{
+    background-color: lightcyan;
+  }
+  
+  /* Buttons */
+  .btn-edit, .btn-delete, .btn-update, .btn-cancel {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .btn-edit {
+    margin-top: 0;
+    background: tomato;
+    color: #fff;
+  }
+  
+  .btn-delete {
+    margin-top: 0;
+    background: tomato;
+    color: #fff;
+  }
+  
+  .btn-update {
+    background: tomato;
+    color: #fff;
+  }
+  
+  .btn-cancel {
+    background: #6c757d;
+    color: #fff;
+  }
+  
+  .btn-edit:hover, .btn-delete:hover, .btn-update:hover, .btn-cancel:hover {
+    transform: scale(1.05);
+    background-color: rgb(240, 45, 10);
+  }
+  
+  /* Popup */
+ 
+  /* Blur Effect */
+
+  /* General styles for the popup container */
+.settable-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Animation for smooth appearance */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Popup content styles */
+  .settable-popup-content {
+    background-color: #fff;
+   
+    border-radius: 8px;
+   
+    
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideIn 0.3s ease-in-out;
+  }
+  
+  /* Animation for sliding in */
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Title and close button container */
+  .title-top {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ background-color: tomato;
+ border-top-right-radius:8px;
+ border-top-left-radius:8px ;
+  }
+  
+  /* Title styles */
+  .title-top h3 {
+    font-size: 1.5rem;
+    color:white;
+    margin: 0;
+  }
+  
+  /* Cancel button styles */
+  .btn-cancel {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color:white;
+    margin: 0;
+  }
+  
+  .btn-cancel:hover {
+    transform: scale(1.5);
+    background: none;
+    border: none;
+  }
+  
+  /* Form group styles */
+  .form-group1 {
+    padding: 10px;
+  }
+  
+  .label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    border-color: tomato;
+    outline: none;
+  }
+  
+  /* Popup action buttons */
+  .popup-actions {
+    padding: 10px;
+  text-align: center;
+  }
+  
+  .btn-update {
+    background: tomato;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin: 0px 0px;
+  }
+  
+  .btn-update:hover {
+    background: rgb(228, 40, 7);
+  }
+  
+  /* Cross icon */
+  
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .settable-popup-content {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .title-top h3 {
+      font-size: 1.2rem;
+    }
+  
+    .btn-update {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+  }
+  
+  /* Switch */
+  .settable-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin: 0px 0px ;
+  }
+  
+  .settable-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .settable-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+  }
+  
+  .settable-slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .settable-slider {
+    background-color: tomato;
+  }
+  
+  input:checked + .settable-slider:before {
+    transform: translateX(25px);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .settable-header, .settable-row {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 5px;
+      font-size: 14px;
+    }
+    .btn-edit, .btn-delete, .btn-update, .btn-cancel {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }
+  .loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+  
+  @media (max-width: 480px) {
+    .settable-header, .settable-row {
+      grid-template-columns: repeat(2, 1fr);
+      font-size: 12px;
+      row-gap: 5px;
+      
+    }
+    .btn-edit, .btn-delete, .btn-update, .btn-cancel {
+      font-size: 10px;
+      padding: 5px 8px;
+    }
+  }
+  

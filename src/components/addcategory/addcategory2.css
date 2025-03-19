@@ -1,0 +1,247 @@
+/* Container Styles */
+.category1 {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styles */
+  .category1 h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Add Category Section */
+  .add-category {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flex-row1 {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .add-category img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px dashed #ddd;
+    cursor: pointer;
+  }
+  
+  .add-category input[type='text'] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .add-item-btn1 {
+    background-color:tomato;
+    color: #fff;
+    border: none;
+    padding: 10px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .add-item-btn1:hover {
+    background-color: rgb(243, 42, 7);
+  }
+  
+  /* Category List Section */
+  .category-list {
+    margin-top: 30px;
+  }
+  
+  .category-list h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .list-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .list-table-format {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+    border-top: 2px solid tomato;
+  }
+  .loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.loading {
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+  
+  .list-table-format.title {
+    border-bottom: 2px solid #ddd;
+    
+  }
+  
+  .table-category {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .table-category li {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+  }
+  span img.category-image{
+    text-align: center;
+  }
+  
+  .table-category .category-image {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+   
+  }
+  
+  .table-category span {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .table-category button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .table-category button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .flex-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .add-category img {
+      max-width: 120px;
+    }
+  
+    .add-item-btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+  
+    .list-table-format {
+      grid-template-columns: 1fr 1fr ;
+      font-size: 0.9rem;
+    }
+  
+    .table-category li {
+      grid-template-columns: 1fr  1fr;
+      font-size: 0.9rem;
+    }
+   
+  }
+  
+  @media (max-width: 480px) {
+    .category1 h3{
+      font-size: 20px;
+    }
+    .add-category img {
+      max-width: 100px;
+    }
+    .flex-row1{
+      display: block;
+      text-align: center;
+      gap: 0;
+      
+    }
+  
+    
+    .table-category button{
+      margin-top: 5px;
+    }
+    
+  
+    .list-table-format {
+      grid-template-columns: 1fr 1fr ;
+      font-size: 0.8rem;
+    }
+  
+    .table-category li {
+      grid-template-columns: 1fr 1fr ;
+      font-size: 0.8rem;
+    }
+  }
+  .delete-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+  }
+  
+  .delete-icon:hover {
+    transform: scale(1.4);
+  }
+  .edit-category{
+    background-color: tomato;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 6px !important;
+  }
+  .edit-category:hover{
+    background-color: rgb(247, 45, 10);
+  }

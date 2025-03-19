@@ -1,0 +1,133 @@
+.explore-menu {
+  padding: 20px;
+}
+
+.explore-menu h1 {
+  color: #262626;
+  font-weight: 500;
+}
+
+.explore-menu-text {
+  max-width: 70%;
+  color: #808080;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.explore-menu-text1 {
+  max-width: 70%;
+  color: #808080;
+  margin-top: 10px;
+}
+
+.explore-menu-list {
+  display: flex;
+  justify-content: flex-start; /* Align items to the start for better scrolling */
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  margin: 20px 0;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 10px;
+  white-space: nowrap; /* Prevent line breaks */
+}
+
+.explore-menu-list::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for a cleaner look */
+}
+
+.explore-menu-list-item {
+  display: inline-block; /* Ensure items align horizontally */
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.explore-menu-list-item img {
+  width: 7.1vw;
+  
+  min-width: 80px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.2s;
+  margin: 5px 3px;
+}
+
+.explore-menu-list-item p {
+  margin-top: 10px;
+  color: #747474;
+  cursor: pointer;
+}
+
+.explore-menu hr {
+  margin: 10px 0;
+  height: 2px;
+  background-color: #e2e2e2;
+  border: none;
+}
+.loading {
+  font-size: 18px;
+  
+  margin-top: 20px;
+  color: #555;
+}
+
+
+.explore-menu-list-item.active img {
+  border: 4px solid tomato;
+  padding: 2px;
+}
+
+.explore-menu-list-item:hover {
+  transform: scale(1.05); /* Slightly enlarge item on hover */
+}
+
+@media (max-width: 1050px) {
+  .explore-menu-text1 {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-menu-list-item img {
+    width: 80px; /* Adjust size for smaller screens */
+    height: 80px;
+  }
+}
+/* Center the loader in the screen */
+.explore-menu-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4; /* Light background color while loading */
+}
+
+/* Loader animation */
+.loader {
+  border: 8px solid #f3f3f3; /* Light gray */
+  border-top: 8px solid tomato; /* Blue color */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error state styling */
+.explore-menu-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+

@@ -1,0 +1,257 @@
+/* Full screen overlay with blur effect */
+.promo-code-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease-in-out;
+  z-index: 6;
+}
+
+.promo-code-popup-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Popup content */
+.promo-code-popup-content {
+  background-color: white;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  width: 500px;
+}
+
+.promo-code-popup-overlay.show .promo-code-popup-content {
+  transform: translateX(0);
+}
+
+/* Fixed top header */
+.top-title {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+  padding-bottom: 10px;
+  margin-top: 25px;
+ 
+ 
+}
+
+/* Header */
+.promo-code-popup-header {
+  display: flex;
+  justify-content: start;
+}
+
+.promo-code-popup-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* Close icon */
+.close-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Fixed input and button */
+.promo-code-popup-body {
+  display: flex;
+  margin: 10px 0;
+}
+
+.promo-code-popup-body input {
+  background-color: rgba(0, 0, 0, 0);
+  outline: 0;
+  height: 50px;
+  width: 80%;
+  font-size: 17px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  border: 1px solid gainsboro;
+  font-weight: 500;
+}
+
+.promo-code-popup-body button {
+  width: 110px;
+  background: #ff5200;
+  color: #fff;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.promo-code-popup-body button:hover {
+  background-color: rgb(253, 45, 8);
+}
+
+/* Coupon list with smooth scrolling */
+.coupon-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding-right: 10px;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.coupon-list::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.coupon-list1 {
+  margin-top: 30px;
+  border: 1px solid #e9e9eb;
+  padding: 28px 0 35px 30px;
+}
+
+.title {
+  color: #7e808c;
+  font-weight: 600;
+  margin: 0 0 28px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.code {
+  background-color: #fffae6;
+  padding: 10px;
+  border: 1px solid #daceb7;
+  margin-bottom: 15px;
+  width: fit-content;
+}
+.flate-rate{
+  font-size: 1.14rem;
+  color: #686b78;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.rate-cart{
+  font-size: 0.92rem;
+  color: #686b78;
+  margin-bottom: 6px;
+  font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+    letter-spacing: 0;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.max-discount{
+  font-size: 0.92rem;
+  color: #686b78;
+  margin-bottom: 6px;
+}
+
+
+  .max-discount {
+  font-size: 0.92rem;
+  color: #686b78;
+  margin-bottom: 6px;
+}
+.Terms {
+  font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+  letter-spacing: 0;
+  font-size: .92rem;
+  color: #686b78;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.more {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  color: #5d8ed5;
+  font-size: .85rem;
+  font-weight: 700;
+  height: 28px;
+  width: 88px;
+  padding-left: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 12px;
+  outline: 0;
+  cursor: pointer;
+  list-style: none;
+  gap: 5px;
+  text-decoration: none;
+}
+
+
+
+.dot-point1 {
+  position: relative;
+  list-style: none;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+.dot-point{
+  position: absolute;
+    content: "";
+    height: 5px;
+    width: 5px;
+    background-color: #282c3f;
+    top: 6px;
+    left: 4px;
+    border-radius: 50%;
+    
+}
+.terms-1{
+  font-size: .82rem;
+   color:rgba(0, 0, 0, 0.726); 
+  font-weight: 200;
+  font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin-bottom: -20px;
+}
+
+.apply-button{
+   margin-top: 15px !important; 
+  width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 50px;
+    padding: 0 2rem;
+    color: #ff5200;
+    letter-spacing: 0;
+    border: 1px solid #ff5200;
+  
+    line-height: 36px;
+    width: auto;
+    height: 36px;
+    padding: 0 15px;
+    outline: 0;
+    min-width: 120px;
+    background: #fff;
+    transition: transform 0.3s ease;
+}
+.apply-button:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+

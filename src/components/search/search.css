@@ -1,0 +1,532 @@
+.search-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .search-popup {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    height: -webkit-fill-available;
+    top: 25px;
+    margin-bottom: 40px;
+    animation: popup-slide-in 0.3s ease;
+  }
+  @keyframes popup-slide-in {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .search-popup-input:focus {
+    border-color: tomato;
+    outline: none;
+  }
+  
+  .search-popup-header {
+  margin-bottom: 20px;
+    text-align: center;
+    color: rgb(104, 107, 120);
+    font-family: 'Outfit';
+  }
+  .loading-item {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    animation: fadeIn 1.5s infinite ease-in-out;
+  }
+  
+  /* Pulsing animation */
+  @keyframes fadeIn {
+    0%, 100% {
+      color: #555; /* Default color */
+      transform: scale(1);
+    }
+    50% {
+      color: #888; /* Slightly lighter color */
+      transform: scale(1.05); /* Slightly enlarge */
+    }
+  }
+  
+  
+  .search-popup-header h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .clear-category-button {
+    position: absolute;
+    right: 10px; /* Position the button inside the input */
+  
+    
+    background: none;
+    border: none;
+    font-size: 30px;
+     
+    cursor: pointer;
+    color: #7e808c;
+    
+
+  }
+  .search-icon-button {
+    position: absolute;
+    right: 2px; 
+    
+   background-color: transparent; /* Set background to white */
+    border: none; /* Remove any default border */
+    padding: 8px; /* Add some padding to the button */
+    display: flex; /* Flexbox for aligning the image inside */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+     /* Round the edges of the button */
+     /* Box shadow only on the left side */
+    cursor: pointer; /* Change the cursor on hover */
+    width: 50px;
+    height: 35px;
+    top: 0.5px;
+    
+  }
+  
+ 
+  
+  .searchButton {
+    width: 20px; /* Set the width of the icon */
+    height: 20px; /* Set the height of the icon */
+  }
+  
+  
+  .clear-category-button:hover {
+    color: #555; /* Hover effect */
+    transform: scale(1.3);
+    
+  }
+  
+  .search-popup-body {
+    
+    gap: 10px;
+    position: relative;
+  }
+  .arrow-icon-button {
+    position: absolute;
+    background-color: transparent; /* Transparent background for minimal design */
+    border: none; /* Remove default button border */
+    padding: 5px 10px; /* Add some padding for click area */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: flex; /* Flex to center align the arrow icon */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    border-radius: 50%; /* Make it circular */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+  }
+  .item-name{
+    cursor: pointer;
+    
+  }
+ 
+  .arrow-icon-button:hover {
+    /* Light gray background on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  .arrow-icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    font-size: 20px; /* Size of the arrow icon */
+    color: tomato; /* Default arrow color */
+    font-weight: bold; /* Make it bold */
+  }
+  
+  .search-popup-input {
+    padding-left: 35px; /* Add space to the left side of the input box */
+    padding-top: 8px; /* Add space at the top (optional) */
+    padding-bottom: 8px; /* Add space at the bottom (optional) */
+    padding-right: 10px; /* Add some space on the right if needed */
+    border-radius: 8px; /* Optional: round the corners */
+    border: 1px solid #ddd; /* Border color */
+    font-size: 16px; /* Set font size */
+    width: 100%; /* Full width, or you can adjust as needed */
+  }
+  
+  .search-popup-button {
+    padding: 10px 15px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  
+  
+  .search-popup-button:hover {
+    background-color: rgb(248, 44, 8);
+  }
+ 
+  
+
+
+  /* Scrollable container */
+.categories-list1 {
+  max-height: 350px;/* Show 3 rows of items before scrolling (adjust row height as needed) */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 16px;
+
+ 
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 transparent;
+
+}
+
+/* Custom scroll for WebKit browsers */
+.categories-list1::-webkit-scrollbar {
+  width: 8px;
+}
+
+.categories-list1::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+.categories-list1::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Categories grid */
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); /* Responsive grid with auto-adjusting columns */
+  gap: 3px;
+  justify-items: center; /* Center items horizontally */
+}
+
+/* Individual category item */
+.category-item1 {
+
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 150px;
+ 
+  cursor: pointer;
+}
+
+/* Hover animation */
+.category-item1:hover {
+  transform: translateY(-5px);
+  
+}
+
+/* Category image */
+.img1 {
+  width: 100%;
+  max-width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 3px solid tomato;
+  transition: border-color 0.3s ease;
+}
+
+.category-item1:hover .img1 {
+  border-color: cyan;
+}
+
+/* Category name */
+.category-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* Loading and error states */
+.loading-item,
+.error {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .categories-container {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust for smaller screens */
+  }
+
+  .category-item1 {
+    max-width: 120px;
+    padding: 12px;
+  }
+
+  .img {
+    max-width: 60px;
+    height: 60px;
+  }
+
+  .category-name {
+    font-size: 12px;
+  }
+}
+
+  
+ 
+  .categories-title1 {
+  font-size: 1.43rem;
+    font-weight: 800;
+    color: #3d4152;
+    letter-spacing: -.3px;
+    margin-left: 4px;
+    font-family: ProximaNovaExtraBold, arial, Helvetica Neue, sans-serif;
+  }
+  
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;/* Spacing between rows */
+    max-height: 360px; /* Adjust to fit 4 items (assuming ~80px per row) */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 5px; /* Prevent content overlap with scrollbar */
+    scrollbar-width: thin; /* Firefox support */
+    scrollbar-color: #c0c0c0 #f5f5f5; /* Custom scrollbar colors */
+  }
+  
+  /* Custom Scrollbar for Chrome, Edge, and Safari */
+  .items-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .items-list::-webkit-scrollbar-thumb {
+    background: #c0c0c0; /* Scrollbar thumb color */
+    border-radius: 4px;
+  }
+  
+  .items-list::-webkit-scrollbar-track {
+    background: #f5f5f5; /* Scrollbar track color */
+  }
+  
+  .item-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between image and text */
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+ 
+  
+  .item-image img {
+    width: 64px; /* Adjust as needed */
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .item-details {
+    display: flex;
+    flex-direction: column; 
+    flex: 1; /* Take up remaining space */
+  }
+  
+  .item-name {
+    font-size: 1.07rem;
+    font-weight: bolder;
+    font:inherit;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .item-description {
+    font-size: 14px;
+    color: rgb(104, 107, 120);
+    margin: 0;
+  }
+  
+  /* Empty message styling */
+.empty {
+  font-size: 18px;
+  font-weight: 500;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+  
+
+  animation: fadeIn 1s ease-in-out, floatUp 1.5s infinite ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Float up and down animation */
+@keyframes floatUp {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .empty {
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+.search-popup-close {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  left: 13%;
+  transform: translateX(-50%);
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-popup-close:hover {
+  background-color: rgb(236, 23, 23);
+}
+
+
+
+
+
+
+.go-to-cart-button{
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  right: -40px;
+  transform: translateX(-50%);
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.go-to-cart-button:hover{
+  background-color: rgb(241, 36, 36);
+}
+
+.quantity-controls {
+  display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 120px;
+      height: 40px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      background-color: #f9f9f9;
+}
+
+.quantity-controls button {
+  color: #ff6347;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quantity-controls button:hover {
+  background-color: tomato; /* Hover background */
+  transform: scale(1.1);
+  color: white; /* Slight zoom effect */
+}
+
+.quantity-controls button:active {
+  background-color: #ccc; /* Active background */
+  transform: scale(0.9); /* Button shrink effect */
+}
+
+.quantity-controls .quantity {
+  font-size: 16px; /* Font size for quantity */
+  font-weight: bold; /* Make the number bold */
+  padding: 0 10px;
+  color: #333; /* Text color */
+}
+
+.quantity-controls {
+  margin: 10px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .quantity-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .quantity-controls .quantity {
+    font-size: 14px;
+  }
+}
+.add-to-cart{
+  background: rgb(255, 255, 255);
+    border: 1px solid rgba(2, 6, 12, 0.15);
+    height: 40px;
+    border-radius: 8px;
+    width: 120px;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex
+;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: center;
+    box-shadow: rgba(40, 44, 63, 0.08) 0px 3px 8px;
+    font-family: Gilroy;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: tomato;
+}
+.add-to-cart:hover{
+  background-color: mintcream;
+}

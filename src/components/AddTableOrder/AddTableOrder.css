@@ -1,0 +1,405 @@
+
+
+.status-dropdown1 {
+
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid tomato;
+  color: #f44336;
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.popup-content {
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slideUp 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Row */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#ff6347;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Input Row */
+.input-row {
+  display: flex;
+  gap: 10px;
+ 
+  padding: 15px;
+}
+
+.input-row input,
+.input-row select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-row input:focus,
+.input-row select:focus {
+  border-color: #ff6347;
+}
+.input-row .error {
+  border: 2px solid red;
+}
+
+.input-row button {
+  padding: 10px 15px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.input-row button:hover {
+  background-color: rgb(197, 43, 16);
+}
+
+/* Order Items Container */
+.order-items-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.order-items-table {
+  flex: 1;
+}
+
+.order-items-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+/* Add your custom toast styles in your CSS file */
+/* Custom CSS for React Toastify */
+.Toastify__toast-container {
+  position: fixed; /* Ensure it stays fixed on the screen */
+  top: 20px;  /* Space from the top */
+  right: 20px;  /* Space from the right */
+  z-index: 9999;  /* Ensure it stays on top */
+}
+
+.Toastify__toast {
+  background-color: white;  /* Green background for success toast */
+  color: white;  /* White text */
+  border-radius: 8px;  /* Rounded corners */
+  padding: 10px 20px;  /* Padding for toast content */
+  font-size: 16px;  /* Font size */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Shadow for the toast */
+}
+
+.Toastify__toast--success {
+  color: #4caf50;  /* Success background color */
+}
+
+.Toastify__toast--error {
+  color: #f44336;  /* Error background color */
+}
+
+.Toastify__toast--info {
+  background-color: #2196f3;  /* Info background color */
+}
+
+.Toastify__toast--warning {
+  background-color: #ff9800;  /* Warning background color */
+}
+
+
+
+.order-items-container th,
+.order-items-container td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: gray ;
+}
+.order-incress{
+  text-align: -webkit-center;
+}
+
+.order-items-container th {
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.order-items-container td {
+  position: relative;
+}
+
+
+.quantity-order{
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+.quantity-order button{
+  color: #ff6347;
+    border: none;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.quantity-order button:hover{
+  color: white;
+  background-color: tomato;
+}
+/* Quantity Cell Styling */
+
+
+
+
+.order-items-container td button:active {
+  
+  transform: scale(0.95);
+}
+
+.order-items-container td span {
+  display: inline-block;
+  min-width: 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .order-items-container td button {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  .order-items-container td span {
+    min-width: 30px;
+    font-size: 14px;
+  }
+}
+
+
+
+
+.order-title {
+  background-color: #f8f9fa;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+/* Style for required input fields with error */
+.input-error {
+  border: 2px solid red;
+  background-color: #fdd;
+}
+
+
+/* Message displayed when the field is empty */
+.input-error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+/* Bottom Row */
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  
+  border-top: 1px solid #ddd;
+}
+
+.bottom-row button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bottom-row button:first-child {
+  background-color: #6c757d;
+  color: white;
+}
+
+.bottom-row button:first-child:hover {
+  background-color: #070707;
+}
+.delet-order {
+  text-align: center;
+}
+
+.delete-button {
+  background: none; /* No background */
+  border: none; /* No border */
+  color: tomato; /* Red color for the cross */
+  font-size: 20px; /* Size of the icon */
+  cursor: pointer; /* Change the cursor to pointer */
+  transition: transform 0.3s ease; /* Smooth scale on hover */
+}
+
+.delete-button:hover {
+  transform: scale(1.2); /* Slightly enlarge the icon on hover */
+}
+
+
+
+.bottom-row button:last-child {
+  background-color: #ff6347;
+  color: white;
+}
+
+.bottom-row button:last-child:hover {
+  background-color:#a7230b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .popup-content {
+    width: 95%;
+  }
+
+  .top-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row input,
+  .input-row select {
+    width: 100%;
+  }
+
+  .order-items-container th,
+  .order-items-container td {
+    font-size: 14px;
+  }
+}
+.popup-remake {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
+.popup-content-remake {
+  background-color: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.popup-header-remake {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.popup-body-remake {
+  margin-bottom: 20px;
+}
+
+.popup-body-remake label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.popup-body-remake textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup-footer-remake {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-footer-remake button {
+  padding: 10px 20px;
+  border: none;
+  background-color: tomato;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.popup-footer-remake button:hover {
+  background-color:rgb(247, 47, 12);
+}
+.remark{
+  color: gray;
+}
+.description1{
+  color: #333;
+}

@@ -1,0 +1,217 @@
+/* Background overlay with blur effect */
+.applied-coupon-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+  backdrop-filter: blur(8px); /* Blur background */
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.applied-coupon-card.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Popup content container */
+.applied-coupon-content {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Smooth shadow */
+  /* padding: 30px; */
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  animation: fadeIn 0.5s ease;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align all content */
+}
+
+/* Positioning the coupon-cart-img 50% outside and 50% inside */
+.coupon-cart-img {
+  position: absolute;
+  top: -30px; /* Move the image upwards, adjust the value as needed */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+.coupon-cart-img img {
+  width:72px;
+ 
+  animation: pulse 1s infinite; /* Pulsing animation for the image */
+}
+
+/* Coupon details */
+.coupon-code {
+  font-size: 1.14rem;
+    color: #686b78;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 50px;
+    font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+    letter-spacing: 0;
+}
+
+.discount-saved {
+  margin-top: 31px;
+    color: #282c3f;
+    font-size: 3.42rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+}
+.discount-saved-text{
+  color: #282c3f;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+}
+.summry{
+  margin: 20px 40px 0;
+    padding-top: 18px;
+    color: #7e808c;
+    font-size: 1.07rem;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+    letter-spacing: 0;
+}
+.close-popup{
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 16px;
+  min-width: 120px;
+  margin-top: 22px;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 0;
+  outline: 0;
+  border-top: 1px solid #d4d5d9;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  color: rgb(252, 128, 26);
+}
+.line-coupon{
+  content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    height: 2px;
+    width: 20px;
+    background: #282c3f;
+}
+
+
+/* Close button */
+.close-button {
+  background-color: #f04e4e;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.close-button:hover {
+  background-color: #d43f3f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .applied-coupon-content {
+    padding: 20px;
+  }
+
+  .coupon-code {
+    font-size: 18px;
+  }
+
+  .discount-saved {
+    font-size: 22px;
+  }
+
+  .close-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .coupon-cart-img img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .applied-coupon-content {
+    padding: 16px;
+  }
+
+  .coupon-code {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+
+  .discount-saved {
+    font-size: 20px;
+    margin-top: 16px;
+  }
+
+  .close-button {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+
+  .coupon-cart-img img {
+    width: 50px;
+    height: 50px;
+    margin-top: 7px;
+  }
+}

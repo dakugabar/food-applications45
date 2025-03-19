@@ -1,0 +1,224 @@
+/* Overlay styling */
+.popup-overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup content styling */
+.popup-content1 {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.4s ease-in-out;
+}
+
+/* Header section */
+.popup-header1 {
+  background: tomato;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 18px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  transform: scale(1.6);
+}
+
+/* Details section */
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  /* border-bottom: 1px solid #ddd; */
+  gap:12px;
+}
+
+.details-item {
+  flex: 1;
+  display: flex;
+  
+  padding: 5px 0;
+}
+
+.customer-name {
+  color: gray;
+  font-weight: bold;
+  margin-left: 3px;
+}
+.customer-name1{
+  color: tomato;
+}
+
+.food-items {
+  padding: 15px;
+  text-align: center;
+}
+
+.center-title {
+  color:tomato;
+  margin-bottom: 10px;
+}
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.food-table th,
+.food-table td {
+  padding: 8px 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+
+.food-table th {
+  background: tomato;
+ color:white;
+ border: 1px solid tomato;
+}
+
+/* Footer section */
+.popup-footer {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.print-btn {
+  background: rgb(243, 65, 34);
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.print-btn:hover {
+  background:rgb(224, 37, 4);
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .popup-content {
+    width: 95%;
+    max-width: 400px;
+  }
+
+  .food-table th,
+  .food-table td {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}
+
+.extra-section {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-top: -15px;
+  width: 243.5px; /* Adjust based on your design */
+  margin-left: auto; /* Aligns the section to the right */
+  margin-right: 15px; /* Optional spacing from the right */
+  border-bottom: none;
+  border-top: none;
+ 
+}
+
+
+.extra-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.extra-item:last-child {
+  border-bottom: none; /* Removes border for the last item */
+}
+
+.extra-discount {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+.discount-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.discount-input:focus {
+  border-color: tomato;
+  outline: none;
+}
+
+.add-discount-btn {
+  padding: 8px 15px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-discount-btn:hover {
+  background-color: rgb(219, 40, 9);
+}
