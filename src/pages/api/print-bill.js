@@ -1,4 +1,4 @@
-import { printDirect } from 'printer';
+// import { printDirect } from 'printer';
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
