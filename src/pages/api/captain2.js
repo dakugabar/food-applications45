@@ -1,7 +1,7 @@
 
 
 import dbConnect from "../../app/lib/dbconnect";
-import Captain from "../../models/captain"; // Ensure correct import
+import Captain from "../../models/hotelverter.js"; // Ensure correct import
 
 export default async function handler(req, res) {
   await dbConnect(); // Connect to MongoDB
