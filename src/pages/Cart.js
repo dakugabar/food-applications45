@@ -559,12 +559,15 @@ const saveCartTotal = async () => {
                   <div className='cart-promocode-input'>
   {appliedCoupon ? (
     <>
-      <input
-        type='text'
-        value={appliedCoupon.code}
-        placeholder='Promo code'
-        readOnly 
-      />
+     <input
+  type='text'
+  value={appliedCoupon.code}
+  placeholder='Promo code'
+  readOnly
+  onFocus={(e) => e.target.blur()}  // This immediately removes focus when tapped
+  tabIndex={-1}  // This prevents the input from being focusable via keyboard navigation
+/>
+      {/* <input type='text' value={appliedCoupon.code} placeholder='Promo code' readOnly  /> */}
       <img
         src='/cross_icon.png'
         alt='Remove'
