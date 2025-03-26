@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './prome2.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import ConfirmationPopup from '../confirmationPopup1';
 
 const PromoCodePopup = ({ isVisible, onClose, onApplyCoupon, subtotal }) => {
   const [coupons, setCoupons] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [expandedCouponId, setExpandedCouponId] = useState(null);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [savedAmount, setSavedAmount] = useState(0);
@@ -15,20 +15,20 @@ const PromoCodePopup = ({ isVisible, onClose, onApplyCoupon, subtotal }) => {
   useEffect(() => {
     const fetchCoupons = async () => {
       setLoading(true);
+      setError(null);
 
       try {
-        // Get token from localStorage or cookies (assumes token is stored here)
-        const token = localStorage.getItem('token'); // Or use cookies if needed
+        const token = localStorage.getItem('token');
 
         if (!token) {
-          setError('User not authenticated');
+          setError('Please login to view available coupons');
           return;
         }
 
         const response = await fetch('/api/coupons2', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`, // Pass the token in the Authorization header
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
@@ -38,93 +38,135 @@ const PromoCodePopup = ({ isVisible, onClose, onApplyCoupon, subtotal }) => {
         if (response.ok && data.success) {
           setCoupons(data.data);
         } else {
-          setError(data.message || 'Failed to fetch coupons.');
+          setError(data.message || 'Failed to fetch coupons. Please try again later.');
         }
       } catch (err) {
         console.error('Error fetching coupons:', err);
-        setError('Error fetching coupons.');
+        setError('Network error. Please check your connection and try again.');
       } finally {
         setLoading(false);
       }
     };
 
     if (isVisible) {
-      fetchCoupons(); // Call the fetch function when the popup is visible
+      fetchCoupons();
     }
   }, [isVisible]);
-
-
-
-  if (error) {
-    return <div>Error: {error}</div>; // Error message
-  }
 
   const handleMoreClick = (couponId) => {
     setExpandedCouponId(expandedCouponId === couponId ? null : couponId);
   };
 
   const handleApplyCoupon = (coupon) => {
-    const discount = ((coupon.rate / 100) * subtotal).toFixed(2);
+    const discount = Math.min(
+      (coupon.rate / 100) * subtotal,
+      coupon.maxDiscount
+    ).toFixed(2);
     setAppliedCoupon(coupon);
     setSavedAmount(discount);
-    onApplyCoupon(coupon); // Callback to apply coupon in parent component
+    onApplyCoupon(coupon);
   };
 
   const handleCloseCouponCard = () => {
     setAppliedCoupon(null);
   };
 
+  if (!isVisible) return null;
+
   return (
     <>
-      <div className={`promo-code-popup-overlay ${isVisible ? 'show' : ''}`}>
+      <div className="promo-code-popup-overlay show">
         <div className="promo-code-popup-content">
           <div className='top-title'>
             <div className="promo-code-popup-header">
-              <img src="/cross_icon.png" alt="Close" className="close-icon" onClick={onClose} />
+              <h2>Available Coupons</h2>
+              <img 
+                src="/cross_icon.png" 
+                alt="Close" 
+                className="close-icon" 
+                onClick={onClose} 
+              />
             </div>
           </div>
+          
           <div className="coupon-list">
-            {coupons.length > 0 ? (
+            {loading ? (
+              <div className="loading-container">
+                <FontAwesomeIcon icon={faSpinner} spin size="2x" />
+                <p>Loading coupons...</p>
+              </div>
+            ) : error ? (
+              <div className="error-message">
+                <p>{error}</p>
+                <button onClick={() => window.location.reload()}>Retry</button>
+              </div>
+            ) : coupons.length > 0 ? (
               coupons.map((coupon) => {
                 const isCouponAvailable = subtotal >= coupon.cartPrice;
                 const additionalAmount = isCouponAvailable ? 0 : (coupon.cartPrice - subtotal).toFixed(2);
+                const maxDiscount = coupon.maxDiscount || 'No limit';
 
                 return (
-                  <div className="coupon-list1" key={coupon._id}>
-                    <p className="title">{isCouponAvailable ? 'Available Coupons' : 'Unavailable Coupons'}</p>
-                    <p className="code">{coupon.code}</p>
-                    <p className="flate-rate">Get FLAT {coupon.rate}% off</p>
-                    <p className="rate-cart">
-                      Use Code {coupon.code} and get FLAT {coupon.rate}% off on orders above Rs.{coupon.cartPrice}. No Upper Limit.
-                    </p>
-                    <p className="max-discount">
-                      Maximum discount up to ₹{coupon.maxDiscount} on orders above ₹{coupon.cartPrice}
-                    </p>
-                    {expandedCouponId === coupon._id ? (
-                      <>
-                        <p className="Terms">Terms and Conditions</p>
-                        <div className='dot-point1'>
-                          <p className='dot-point'></p>
-                         <p className="terms-1">{coupon.terms}</p>
-                        </div>
-                      </>
-                    ) : (
-                      <p className="more" onClick={() => handleMoreClick(coupon._id)}>
-                        <FontAwesomeIcon icon={faPlus} /> MORE
+                  <div className={`coupon-card ${isCouponAvailable ? 'available' : 'unavailable'}`} key={coupon._id}>
+                    <div className="coupon-header">
+                      <div className="coupon-percent">{coupon.rate}% OFF</div>
+                      <div className="coupon-code">{coupon.code}</div>
+                    </div>
+                    
+                    <div className="coupon-details">
+                      <p className="coupon-description">
+                        Get {coupon.rate}% off on orders above ₹{coupon.cartPrice}
                       </p>
-                    )}
-                    <div className='apply-button' onClick={() => isCouponAvailable ? handleApplyCoupon(coupon) : null}>
-                      {isCouponAvailable ? 'APPLY COUPON' : `Add ₹${Math.round(additionalAmount)} more to available this offer`}
+                      <p className="coupon-max-discount">
+                        Max discount: ₹{maxDiscount}
+                      </p>
+                      
+                      {expandedCouponId === coupon._id ? (
+                        <>
+                          <div className="coupon-terms">
+                            <h4>Terms and Conditions</h4>
+                            <p>{coupon.terms}</p>
+                          </div>
+                          <button 
+                            className="show-less-btn"
+                            onClick={() => handleMoreClick(coupon._id)}
+                          >
+                            <FontAwesomeIcon icon={faMinus} /> LESS
+                          </button>
+                        </>
+                      ) : (
+                        <button 
+                          className="show-more-btn"
+                          onClick={() => handleMoreClick(coupon._id)}
+                        >
+                          <FontAwesomeIcon icon={faPlus} /> MORE
+                        </button>
+                      )}
+                    </div>
+                    
+                    <div 
+                      className={`apply-btn ${isCouponAvailable ? '' : 'disabled'}`}
+                      onClick={() => isCouponAvailable && handleApplyCoupon(coupon)}
+                    >
+                      {isCouponAvailable ? (
+                        'APPLY COUPON'
+                      ) : (
+                        `Add ₹${additionalAmount} more to use this coupon`
+                      )}
                     </div>
                   </div>
                 );
               })
             ) : (
-              <p>No coupons available</p>
+              <div className="no-coupons">
+                <p>No coupons available at this time</p>
+                <p>Check back later for exciting offers!</p>
+              </div>
             )}
           </div>
         </div>
       </div>
+      
       {appliedCoupon && (
         <ConfirmationPopup 
           coupon={appliedCoupon} 
