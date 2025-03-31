@@ -33,18 +33,6 @@ const AddTableOrder = ({ selectedTable, totalSeats, onClose, onPlaceOrder }) => 
 
     fetchCategories();
   }, []);
-  useEffect(() => {
-    // Load QZ Tray script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/qz-tray@2.1.1';
-    script.async = true;
-    document.body.appendChild(script);
-  
-    return () => {
-      // Cleanup
-      document.body.removeChild(script);
-    };
-  }, []);
 
   // Fetch items for a selected category
   useEffect(() => {
@@ -205,149 +193,103 @@ const AddTableOrder = ({ selectedTable, totalSeats, onClose, onPlaceOrder }) => 
       setLoading(false);
     }
   };
-  const printBill = async () => {
+
+  const printBill = () => {
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, '0');
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
     const year = currentDate.getFullYear();
     let hours = currentDate.getHours();
     const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+  
+    // Determine AM or PM
     const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+    // Convert 24-hour format to 12-hour format
     hours = hours % 12;
-    hours = hours ? String(hours).padStart(2, '0') : '12';
-    
+    hours = hours ? String(hours).padStart(2, '0') : '12'; // The hour '0' should be '12'
+  
     const formattedDate = `${day}/${month}/${year}`;
     const formattedTime = `${hours}:${minutes} ${ampm}`;
+
+    const billContent = `
+    <div style="font-family: Arial, sans-serif; font-size: 14px; padding: 0; line-height: 1.4; max-width: 300px; margin: 0 auto; margin-left:-6px; margin-right:10px;">
+      <h2 style="text-align: center; margin-bottom: 2px;">Tomato Restaurant</h2>
+     
   
-    try {
-      // Check if QZ Tray is loaded
-      if (typeof qz === 'undefined') {
-        throw new Error("QZ Tray is not loaded. Make sure QZ Tray is installed and running.");
-      }
+    
+      <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #333; font-weight: bold;">
+         <div>
+      Kitchen Slip
+    </div>
+        <div>Table: ${selectedTable}</div>
+     
 
-      // Connect to QZ Tray
-      qz.api.setPromiseType(resolver => new Promise(resolver));
-      await qz.websocket.connect();
 
-      // Find printers
-      const printers = await qz.printers.find();
-      if (!printers || printers.length === 0) {
-        throw new Error("No printers found");
-      }
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 12px;">
+    <div>Date: ${formattedDate}</div>
+        <div>Time: ${formattedTime}</div>
+    </div>
+    
+  
+      <div style="border-bottom: 1px dotted #000; margin-bottom: 10px;"></div>
+  
+      <div style="font-weight: bold; font-size: 12px;">
+        <div style="display: flex; justify-content: space-between; text-align: center;">
+          <span style="flex: 1; text-align: left;">Item Name</span>
+          <span style="flex: 1;text-align:right;">Qty</span>
+        </div>
+      </div>
+  
+      <div style="border-bottom: 1px dotted #000; margin-bottom: 10px;"></div>
+  
+      ${orderItems
+        .map(
+          (item) => `
+            <div style="display: flex; justify-content: space-between; text-align: center; font-size: 12px;">
+              <span style="flex: 3; text-align: left;">${item.name}</span>
+              <span style="flex: 1; text-align: right;">${item.quantity}</span>
+            </div>`
+        )
+        .join('')}
+          <div style="flex: 1; border-top: 1px dotted #000;margin-top: 7px;"></div>
+ <div style="margin-bottom: 4px; margin-top: 8px;line-height: 1.6;">
+ 
+ Note:   ${description || "No remarks entered."}
+ </div>
 
-      // Select the first printer
-      const printer = printers[0];
-      
-      // Create configuration for thermal printer (80mm width)
-      const config = qz.configs.create(printer, {
-        scaleContent: true,
-        size: { 
-          width: 576,  // 80mm in dots (1mm = 8 dots for 203 DPI)
-          height: null // Auto-height
-        },
-        margins: {
-          top: 0,
-          left: 0
-        },
-        rasterize: false
-      });
+    <div style="flex: 1; border-top: 1px dotted #000;"></div>
+      <div style="display: flex; align-items: center; font-weight: bold; font-size: 14px; margin-top: 10px; margin-bottom: 20px;">
+        <div style="flex: 1; border-top: 1px dotted #000;"></div>
+        <div style="padding: 0 10px; text-align: center;">
+        Items Prepared Quickly
+        </div>
+        <div style="flex: 1; border-top: 1px dotted #000;"></div>
+      </div>
 
-      // Create ESC/POS receipt content
-      const receiptContent = [
-        '\x1B\x40',         // Initialize printer
-        '\x1B\x61\x01',     // Center alignment
-        
-        // Restaurant Header (Double height + bold)
-        '\x1B\x21\x30',     // Double height + bold
-        ' TOMATO RESTAURANT \n',
-        '\x1B\x21\x00',     // Normal text
-        '\x1B\x61\x01',     // Center alignment
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n',
-        '   KITCHEN SLIP   \n',
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
-        
-        // Table and Customer Info
-        '\x1B\x61\x00',     // Left alignment
-        `Table: ${selectedTable.padEnd(15)}`,
-        '\x1B\x61\x02',     // Right alignment
-        `Customer: ${(customerName || 'Walk-in').substring(0, 12)}\n`,
-        
-        // Date and Time
-        '\x1B\x61\x00',     // Left alignment
-        `Date: ${formattedDate}`,
-        '\x1B\x61\x02',     // Right alignment
-        `Time: ${formattedTime}\n\n`,
-        
-        // Divider line
-        '\x1B\x61\x01',     // Center alignment
-        '------------------------\n',
-        
-        // Items Header (Bold)
-        '\x1B\x21\x08',     // Bold on
-        '\x1B\x61\x00',     // Left alignment
-        'ITEM'.padEnd(24),
-        '\x1B\x61\x02',     // Right alignment
-        'QTY\n',
-        '\x1B\x21\x00',     // Bold off
-        '\x1B\x61\x01',     // Center alignment
-        '------------------------\n',
-        
-        // Order Items
-        ...orderItems.flatMap(item => {
-          const nameLine = '\x1B\x61\x00' + item.name.substring(0, 24).padEnd(24);
-          const qtyLine = '\x1B\x61\x02' + item.quantity.toString().padStart(3);
-          return `${nameLine}${qtyLine}\n`;
-        }),
-        
-        // Divider line
-        '\x1B\x61\x01',     // Center alignment
-        '------------------------\n\n',
-        
-        // Remark Section
-        '\x1B\x61\x00',     // Left alignment
-        'NOTE:\n',
-        '\x1B\x61\x00',     // Left alignment
-        `${(description || "No remarks").substring(0, 32).replace(/\n/g, ' ')}\n\n`,
-        
-        // Footer
-        '\x1B\x61\x01',     // Center alignment
-        '\x1B\x21\x10',     // Bold + Double height
-        'THANK YOU!\n',
-        '\x1B\x21\x00',     // Normal text
-        'Please prepare quickly\n',
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n',
-        
-        // Paper cut and feed
-        '\n\n\n',
-        '\x1B\x69'         // Partial cut
-      ].join('');
 
-      // Print data for thermal printer
-      const data = [{
-        type: 'raw',
-        format: 'plain',
-        data: receiptContent
-      }];
-
-      // Print and wait for completion
-      await qz.print(config, data);
-      
-      toast.success(`Bill printed successfully to ${printer}!`, { autoClose: 3000 });
-      return true;
-      
-    } catch (error) {
-      console.error("Printing error:", error);
-      toast.error(`Printing failed: ${error.message}`, { autoClose: 5000 });
-      return false;
-    } finally {
-      setTimeout(() => {
-        if (qz.websocket.isActive()) {
-          qz.websocket.disconnect();
-        }
-      }, 3000);
-    }
-};
-
+    </div>
+  `;
+  
+  // Open a new window for printing
+  const printWindow = window.open( 'width=350,height=600');
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bill</title>
+      </head>
+      <body>
+        ${billContent}
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.print();
+  };  
   const handleRemarkClose = () => {
     // Close the remark popup and reset the description
     setShowPopup(false);

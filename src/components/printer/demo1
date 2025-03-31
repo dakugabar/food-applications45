@@ -36,18 +36,11 @@ const Printer = () => {
         if (typeof qz === 'undefined') {
           throw new Error("QZ Tray is not loaded. Make sure QZ Tray is installed and running.");
         }
-  
-        // Check if QZ Tray is already connected
-        if (qz.websocket.isActive()) {
-          console.log("QZ Tray is already connected.");
-          setQzInitialized(true);
-          return;
-        }
-  
+
         qz.api.setPromiseType(resolver => new Promise(resolver));
         await qz.websocket.connect();
         setQzInitialized(true);
-  
+
         const printers = await qz.printers.find();
         setAvailablePrinters(printers);
         await fetchPrinters();
@@ -57,7 +50,7 @@ const Printer = () => {
         setLoading(false);
       }
     };
-  
+
     if (typeof qz === 'undefined') {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/qz-tray@2.1.1';
@@ -67,15 +60,13 @@ const Printer = () => {
     } else {
       initializeQZTray();
     }
-  
+
     return () => {
-      if (qz.websocket.isActive()) {
+      if (qzInitialized && qz.websocket.isActive()) {
         qz.websocket.disconnect();
-        console.log("QZ Tray disconnected.");
       }
     };
   }, []);
-  
 
   const handleAddPrinter = async (type, printerName) => {
     try {
@@ -103,26 +94,23 @@ const Printer = () => {
   const handleDeletePrinter = async (type, printerId) => {
     try {
       await axios.delete(`/api/printers/${type}/${printerId}`);
-  
+
       // Update the appropriate state
       switch (type) {
         case 'delivery':
-          setDeliveryPrinters(deliveryPrinters.filter(p => p._id !== printerId));
+          setDeliveryPrinters(deliveryPrinters.filter(p => _id !== printerId));
           break;
         case 'table':
-          setTablePrinters(tablePrinters.filter(p => p._id !== printerId));
+          setTablePrinters(tablePrinters.filter(p => _id !== printerId));
           break;
         case 'kitchen':
-          setKitchenPrinters(kitchenPrinters.filter(p => p._id !== printerId));
+          setKitchenPrinters(kitchenPrinters.filter(p => _id !== printerId));
           break;
-        default:
-          console.error("Invalid printer type");
       }
     } catch (err) {
       setError(`Failed to delete ${type} printer: ${err.response?.data?.message || err.message}`);
     }
   };
-  
 
   const getAvailablePrinters = (assignedPrinters) => {
     const assignedNames = assignedPrinters.map(p => p.name);

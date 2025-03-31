@@ -20,7 +20,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@reduxjs/toolkit": "^2.2.7",
     "aws-sdk": "^2.1692.0",
-    "axios": "^1.7.4",
+    "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
     "cookie": "^1.0.2",
     "electron-builder": "^25.1.8",
@@ -53,6 +53,7 @@
     "react-spring": "^9.7.5",
     "react-toastify": "^10.0.6",
     "sharp": "^0.33.5",
+    "swr": "^2.3.3",
     "twilio": "^5.2.2",
     "uuid": "^10.0.0"
   },
