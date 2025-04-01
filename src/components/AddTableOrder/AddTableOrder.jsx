@@ -256,69 +256,55 @@ const AddTableOrder = ({ selectedTable, totalSeats, onClose, onPlaceOrder }) => 
       const receiptContent = [
         '\x1B\x40',         // Initialize printer
         '\x1B\x61\x01',     // Center alignment
-        
-        // Restaurant Header (Double height + bold)
         '\x1B\x21\x30',     // Double height + bold
-        ' TOMATO RESTAURANT \n',
+        'Tomato Restaurant\n',
         '\x1B\x21\x00',     // Normal text
-        '\x1B\x61\x01',     // Center alignment
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n',
-        '   KITCHEN SLIP   \n',
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n\n',
+        'Kitchen Slip\n\n',
         
-        // Table and Customer Info
+        // Table and Customer
         '\x1B\x61\x00',     // Left alignment
-        `Table: ${selectedTable.padEnd(15)}`,
+        `Table: ${selectedTable}`,
         '\x1B\x61\x02',     // Right alignment
-        `Customer: ${(customerName || 'Walk-in').substring(0, 12)}\n`,
+        `Customer: ${customerName || 'Walk-in'}\n`,
         
         // Date and Time
         '\x1B\x61\x00',     // Left alignment
-        `Date: ${formattedDate}`,
-        '\x1B\x61\x02',     // Right alignment
-        `Time: ${formattedTime}\n\n`,
+        `Date: ${formattedDate}  Time: ${formattedTime}\n\n`,
         
         // Divider line
         '\x1B\x61\x01',     // Center alignment
-        '------------------------\n',
+        '--------------------------------\n',
         
-        // Items Header (Bold)
-        '\x1B\x21\x08',     // Bold on
+        // Items header
         '\x1B\x61\x00',     // Left alignment
-        'ITEM'.padEnd(24),
+        'Item Name',
         '\x1B\x61\x02',     // Right alignment
-        'QTY\n',
-        '\x1B\x21\x00',     // Bold off
+        'Qty\n',
         '\x1B\x61\x01',     // Center alignment
-        '------------------------\n',
+        '--------------------------------\n',
         
-        // Order Items
+        // Order items
         ...orderItems.flatMap(item => {
-          const nameLine = '\x1B\x61\x00' + item.name.substring(0, 24).padEnd(24);
-          const qtyLine = '\x1B\x61\x02' + item.quantity.toString().padStart(3);
+          const nameLine = '\x1B\x61\x00' + item.name;
+          const qtyLine = '\x1B\x61\x02' + item.quantity;
           return `${nameLine}${qtyLine}\n`;
         }),
         
         // Divider line
         '\x1B\x61\x01',     // Center alignment
-        '------------------------\n\n',
+        '--------------------------------\n\n',
         
-        // Remark Section
+        // Remark
         '\x1B\x61\x00',     // Left alignment
-        'NOTE:\n',
-        '\x1B\x61\x00',     // Left alignment
-        `${(description || "No remarks").substring(0, 32).replace(/\n/g, ' ')}\n\n`,
+        `Note: ${description || "No remarks entered."}\n\n`,
         
         // Footer
         '\x1B\x61\x01',     // Center alignment
-        '\x1B\x21\x10',     // Bold + Double height
-        'THANK YOU!\n',
-        '\x1B\x21\x00',     // Normal text
-        'Please prepare quickly\n',
-        '~~~~~~~~~~~~~~~~~~~~~~~~\n',
+        'Items Prepared Quickly\n',
+        '--------------------------------\n',
         
-        // Paper cut and feed
-        '\n\n\n',
+        // Add some line feeds before cutting
+        '\n\n\n\n',
         '\x1B\x69'         // Partial cut
       ].join('');
 
