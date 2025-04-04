@@ -1,193 +1,312 @@
-.captain-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  /* Add Captain Button Loading Effect */
-
-
-.add-button:disabled {
-  background-color: #a0a0a0;
-  cursor: not-allowed;
+:root {
+  --primary: #4361ee;
+  --primary-light: #4895ef;
+  --secondary: #3f37c9;
+  --danger: #f72585;
+  --success: #4cc9f0;
+  --dark: #212529;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
 }
 
-.add-button.loading::after {
-  content: "";
-  position: absolute;
- 
-  animation: spin 0.6s linear infinite;
-}
-
-/* Loading Indicator for Fetching Data */
-.loading-indicator {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 16px;
-  color:tomato;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-  
-  .title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .input-label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-    text-align: left;
-  }
-  
-  .input-box {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.3s;
-  }
-  
-  .input-box:focus {
-    border-color:tomato;
-    outline: none;
-  }
-  
-  .add-button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: tomato;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .add-button:hover {
-    background: rgb(245, 63, 30);
-  }
-  
-  /* Captain List *
-   */
-.table-container {
-  max-width: 700px;
-  margin: 5px auto;
-  margin-top: 30px;
-  padding: 10px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-/* Captain List */
-.captain-list {
-  list-style: none;
-  padding: 0;
+* {
+  box-sizing: border-box;
   margin: 0;
-  max-height: 270px; /* 4 items visible */
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color:#e94a5a  #f1f1f1;
+  padding: 0;
 }
 
-.captain-list::-webkit-scrollbar {
-  width: 8px;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: var(--dark);
+  line-height: 1.6;
 }
 
-.captain-list::-webkit-scrollbar-thumb {
-  background: tomato;
-  border-radius: 10px;
+.captain-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.captain-item {
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-card, .list-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  margin: 5px 0;
-  background: #f8f9fa;
-  border-radius: 5px;
-  transition: 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
 }
 
-
-
-.button-group2 {
-  display: flex;
-  gap: 20px;
+.form-header h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
 }
 
-.edit-btn2, .delete-btn2 {
-  padding: 5px 10px;
+.icon-btn {
+  background: none;
   border: none;
-  border-radius: 3px;
-  font-size: 0.9rem;
+  color: var(--gray);
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  color: var(--danger);
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-left: 4px solid #dc2626;
+}
+
+.success {
+  background-color: #dcfce7;
+  color: #166534;
+  border-left: 4px solid #22c55e;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.pin-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pin-input {
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.pin-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.submit-btn:hover {
+  background-color: var(--secondary);
+}
+
+.submit-btn:disabled {
+  background-color: var(--gray);
+  cursor: not-allowed;
+}
+
+.submit-btn.loading {
+  position: relative;
+}
+
+.spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.list-header h3 {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.total-badge {
+  background-color: var(--primary-light);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--gray);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state img {
+  width: 150px;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.empty-state p {
+  color: var(--gray);
+}
+
+.captain-list {
+  list-style: none;
+}
+
+.captain-list li {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background-color: white;
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.captain-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-light);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.details h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.details p {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn, .delete-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
   margin-top: 0px;
 }
 
-.edit-btn2 {
-  background: tomato;
-  color: white;
+.edit-btn {
+  background-color: #e9ecef;
+  color: var(--primary);
 }
 
-.edit-btn2:hover {
-  background: #dc3545;
+.edit-btn:hover {
+  background-color: #dee2e6;
 }
 
-.delete-btn2 {
-  background: tomato;
-  color: white;
+.delete-btn {
+  background-color: #fff5f5;
+  color: var(--danger);
 }
 
-.delete-btn2:hover {
-  background: #dc3545;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .captain-container, .table-container {
-    max-width: 100%;
-    padding: 15px;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .input-box {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-
-  .add-button {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-
-  .captain-item {
-    flex-direction: column;
-    text-align: left;
-  }
-
-  .button-group2 {
-    width: 100%;
-    justify-content: flex-end;
-  }
+.delete-btn:hover {
+  background-color: #fee2e2;
 }

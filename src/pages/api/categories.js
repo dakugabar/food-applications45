@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   await dbConnect();
 
   try {
-    const categories = await Category.find({}); // Fetch all categories
+    const categories = await Category.find({}); 
     res.status(200).json(categories);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch categories' });

@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { FiEdit2, FiTrash2, FiPlus, FiX, FiCheck } from "react-icons/fi";
 import "./addcaptain.css";
 
 const AddCaptain = () => {
@@ -9,9 +10,36 @@ const AddCaptain = () => {
   const [captains, setCaptains] = useState([]);
   const [editId, setEditId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(true); // New state for fetching loading
+  const [isFetching, setIsFetching] = useState(true);
+  const [pin, setPin] = useState(["", "", "", ""]);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  // Fetch Captains
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        when: "beforeChildren"
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
+  // Fetch all captains
   const fetchCaptains = async () => {
     setIsFetching(true);
     try {
@@ -19,104 +47,271 @@ const AddCaptain = () => {
       setCaptains(response.data);
     } catch (error) {
       console.error("Error fetching captains:", error);
+      setError("Failed to load captains");
     }
     setIsFetching(false);
   };
 
-  useEffect(() => {
-    fetchCaptains();
-  }, []);
+  useEffect(() => { fetchCaptains(); }, []);
 
-  // Add or Update Captain
-  const handleAddCaptain = async () => {
-    if (!captainName.trim()) return;
-    setIsLoading(true);
+  // Reset form
+  const resetForm = () => {
+    setCaptainName("");
+    setPin(["", "", "", ""]);
+    setEditId(null);
+    setError("");
+  };
 
-    try {
-      if (editId) {
-        await axios.put(`/api/captains/${editId}`, { name: captainName });
-      } else {
-        await axios.post("/api/captains", { name: captainName });
-      }
-
-      setCaptainName("");
-      setEditId(null);
-      fetchCaptains(); // Refresh list
-    } catch (error) {
-      console.error("Error adding/updating captain:", error);
+  // Handle form submission
+  const handleSubmit = async () => {
+    if (!captainName.trim()) {
+      setError("Please enter a captain name");
+      return;
     }
     
-    setIsLoading(false);
+    if (pin.some(digit => digit === "" || isNaN(digit))) {
+      setError("Please enter a valid 4-digit PIN");
+      return;
+    }
+    
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const captainData = { name: captainName, pin: pin.join("") };
+      
+      if (editId) {
+        await axios.put("/api/captains", { id: editId, ...captainData });
+        setSuccess("Captain updated successfully");
+      } else {
+        await axios.post("/api/captains", captainData);
+        setSuccess("Captain added successfully");
+      }
+
+      resetForm();
+      fetchCaptains();
+      
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to save captain");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Edit Captain
-  const handleEdit = (id, name) => {
-    setCaptainName(name);
-    setEditId(id);
+  // Edit captain
+  const handleEdit = (captain) => {
+    setCaptainName(captain.name);
+    setPin(captain.pin.split(""));
+    setEditId(captain._id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Delete Captain
+  // Delete captain
   const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this captain?")) return;
+    
     setIsLoading(true);
     try {
-      await axios.delete(`/api/captains/${id}`);
-      fetchCaptains(); // Refresh list
+      await axios.delete(`/api/captains?id=${id}`);
+      setSuccess("Captain deleted successfully");
+      fetchCaptains();
+      if (editId === id) resetForm();
+      setTimeout(() => setSuccess(""), 3000);
     } catch (error) {
-      console.error("Error deleting captain:", error);
+      setError("Failed to delete captain");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
-    <>
-      <div className="captain-container">
-        <motion.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="title">
-          Add Captain
-        </motion.h2>
-
-        <label className="input-label">Captain Name:</label>
-        <motion.input
-          type="text"
-          value={captainName}
-          onChange={(e) => setCaptainName(e.target.value)}
-          className="input-box"
-          placeholder="Enter Captain Name"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        />
-
-        <motion.button
-          onClick={handleAddCaptain}
-          className={`add-button ${isLoading ? "loading" : ""}`}
-          disabled={isLoading}
-          whileHover={!isLoading ? { scale: 1.05 } : {}}
-          whileTap={!isLoading ? { scale: 0.95 } : {}}
+    <motion.div 
+      className="captain-page"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container">
+        {/* Form Section */}
+        <motion.div 
+          className="form-card"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
         >
-          {isLoading ? "Loading..." : editId ? "Update Captain" : "Add Captain"}
-        </motion.button>
-      </div>
-
-      {isFetching ? (
-        <p className="loading-indicator">Fetching Captains...</p>
-      ) : (
-        captains.length > 0 && (
-          <div className="table-container">
-            <ul className="captain-list">
-              {captains.map((captain, index) => (
-                <motion.li key={captain._id} className="captain-item" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.1 }}>
-                  <span>{captain.name}</span>
-                  <div className="button-group2">
-                    <button className="edit-btn2" onClick={() => handleEdit(captain._id, captain.name)}>Update</button>
-                    <button className="delete-btn2" onClick={() => handleDelete(captain._id)}>Delete</button>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
+          <div className="form-header">
+            <h2>{editId ? "Update Captain" : "Add New Captain"}</h2>
+            {editId && (
+              <button onClick={resetForm} className="icon-btn">
+                <FiX size={20} />
+              </button>
+            )}
           </div>
-        )
-      )}
-    </>
+
+          <AnimatePresence>
+            {error && (
+              <motion.div 
+                className="alert error"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
+            {success && (
+              <motion.div 
+                className="alert success"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                {success}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="form-group">
+            <label>Captain Name</label>
+            <input
+              type="text"
+              value={captainName}
+              onChange={(e) => setCaptainName(e.target.value)}
+              placeholder="Enter captain name"
+              className="input-field"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>4-Digit PIN</label>
+            <div className="pin-container">
+              {pin.map((digit, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  maxLength="1"
+                  value={digit}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "" || /^\d$/.test(val)) {
+                      const newPin = [...pin];
+                      newPin[index] = val;
+                      setPin(newPin);
+                      if (val && index < 3) document.getElementById(`pin-${index+1}`)?.focus();
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Backspace" && !digit && index > 0) {
+                      document.getElementById(`pin-${index-1}`)?.focus();
+                    }
+                  }}
+                  id={`pin-${index}`}
+                  className="pin-input"
+                />
+              ))}
+            </div>
+          </div>
+
+          <motion.button 
+            onClick={handleSubmit} 
+            disabled={isLoading}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className={`submit-btn ${isLoading ? 'loading' : ''}`}
+          >
+            {isLoading ? (
+              <span className="spinner"></span>
+            ) : editId ? (
+              <>
+                <FiCheck size={18} /> Update Captain
+              </>
+            ) : (
+              <>
+                <FiPlus size={18} /> Add Captain
+              </>
+            )}
+          </motion.button>
+        </motion.div>
+
+        {/* List Section */}
+        <motion.div 
+          className="list-card"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="list-header">
+            <h3>Captain List</h3>
+            <div className="total-badge">{captains.length} Captains</div>
+          </div>
+
+          {isFetching ? (
+            <div className="loading-state">
+              <div className="spinner"></div>
+              <p>Loading captains...</p>
+            </div>
+          ) : captains.length === 0 ? (
+            <motion.div 
+              className="empty-state"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <img src="/empty-state.svg" alt="No captains" />
+              <p>No captains found. Add one to get started!</p>
+            </motion.div>
+          ) : (
+            <motion.ul 
+              className="captain-list"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <AnimatePresence>
+                {captains.map((captain) => (
+                  <motion.li 
+                    key={captain._id}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.01 }}
+                    layout
+                  >
+                    <div className="captain-info">
+                      <div className="avatar">
+                        {captain.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="details">
+                        <h4>{captain.name}</h4>
+                        <p>PIN: {captain.pin}</p>
+                      </div>
+                    </div>
+                    <div className="actions">
+                      <motion.button 
+                        onClick={() => handleEdit(captain)}
+                        disabled={isLoading}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="edit-btn"
+                      >
+                        <FiEdit2 />
+                      </motion.button>
+                      <motion.button 
+                        onClick={() => handleDelete(captain._id)}
+                        disabled={isLoading}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="delete-btn"
+                      >
+                        <FiTrash2 />
+                      </motion.button>
+                    </div>
+                  </motion.li>
+                ))}
+              </AnimatePresence>
+            </motion.ul>
+          )}
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 

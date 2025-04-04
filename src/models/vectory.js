@@ -1,20 +1,16 @@
+// models/vectory.js
 import mongoose from "mongoose";
 
 const VectorySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  pin: {
-    type: String,
-    required: true,
-    minlength: 4,
-    maxlength: 4,
+  captain: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'hotelverter',
+    required: true
   },
   tables: {
     type: [String],
-    default: [],
-  },
+    default: []
+  }
 }, { timestamps: true });
 
 export default mongoose.models.Vectory || mongoose.model("Vectory", VectorySchema);

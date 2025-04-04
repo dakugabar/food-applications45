@@ -1,8 +1,31 @@
-//model- captain.js
+// model - captain.js
 import mongoose from "mongoose";
 
 const CaptainSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { 
+    type: String, 
+    required: true ,
+    unique: true,
+  },
+  pin: {
+    type: String,
+    required: true,
+    minlength: 4,
+    maxlength: 4,
+    validate: {
+      validator: function(v) {
+        return /^\d{4}$/.test(v); // Ensure it's exactly 4 digits
+      },
+      message: props => `${props.value} is not a valid 4-digit PIN!`
+    },
+    unique: true,
+  },
+  token: {
+    type: String,
+    unique: true,
+    sparse: true // Allows for null values while maintaining uniqueness for non-null values
+  },
+
 });
 
 // Use existing model if already defined
