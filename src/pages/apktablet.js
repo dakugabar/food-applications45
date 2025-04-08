@@ -30,19 +30,16 @@ const Apktablet = () => {
   };
 
   // Fetch tables after PIN verification
-  const fetchTables = async (captainID) => {
+  const fetchTables = async (captainId) => {
     try {
-      const response = await fetch(`/api/get-captain-tables?captain=${captain}`);
-
+      const response = await fetch(`/api/get-captain-tables?captain=${captainId}`);
       if (!response.ok) {
-        throw new Error("Could not fetch vectory data");
+        throw new Error("Failed to fetch tables");
       }
-
       const data = await response.json();
-      setTables(data.tables); // ✅ Store tables in state
+      setTables(data.tables);
     } catch (error) {
-      console.error("Error fetching tables:", error);
-      setError("Failed to fetch table data");
+      setError(error.message || "Failed to fetch table data");
     }
   };
 
@@ -59,7 +56,7 @@ const Apktablet = () => {
     setError(null);
 
     try {
-      // ✅ Verify PIN
+      // Verify PIN
       const verifyResponse = await fetch("/api/verify-pin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -67,7 +64,6 @@ const Apktablet = () => {
       });
 
       const verifyData = await verifyResponse.json();
-
       if (!verifyResponse.ok) {
         throw new Error(verifyData.message || "Invalid PIN");
       }
@@ -76,16 +72,15 @@ const Apktablet = () => {
         throw new Error("Captain information is missing in response");
       }
 
-      // ✅ Store Captain Info
-      const captain = verifyData.captain._id;
-      setCaptainInfo({ name: verifyData.captain.name, id: captain });
+      // Store Captain Info
+      const captainId = verifyData.captain._id;
+      setCaptainInfo({ name: verifyData.captain.name, id: captainId });
       setShowResult(true);
 
-      // ✅ Fetch tables using captain ID
-      fetchTables(captain);
+      // Fetch assigned tables
+      fetchTables(captainId);
     } catch (err) {
       setError(err.message || "Failed to connect to server");
-      console.error("Error:", err);
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +113,9 @@ const Apktablet = () => {
             {tables.length > 0 ? (
               <ul>
                 {tables.map((table, index) => (
-                  <li key={index}>{table}</li>
+                  <li key={index}>
+                    <strong>{table.tableName}</strong> - Seats: {table.seatNumber} - Status: {table.status}
+                  </li>
                 ))}
               </ul>
             ) : (

@@ -20,11 +20,11 @@ const CaptainSchema = new mongoose.Schema({
     },
     unique: true,
   },
-  token: {
-    type: String,
-    unique: true,
-    sparse: true // Allows for null values while maintaining uniqueness for non-null values
-  },
+  // token: {
+  //   type: String,
+  //   unique: true,
+  //   sparse: true // Allows for null values while maintaining uniqueness for non-null values
+  // },
 
 });
 
