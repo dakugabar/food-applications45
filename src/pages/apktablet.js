@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
-import "./apktablet.css";
 
 const Apktablet = () => {
   const [pin, setPin] = useState(["", "", "", ""]);
   const [captainInfo, setCaptainInfo] = useState(null);
+  const [tables, setTables] = useState([]);
   const [error, setError] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const inputRefs = useRef([]);
 
+  // Handle PIN input changes
   const handleChange = (index, value) => {
     if (!/^\d?$/.test(value)) return;
 
@@ -21,33 +22,31 @@ const Apktablet = () => {
     }
   };
 
+  // Handle backspace for PIN input
   const handleKeyDown = (index, event) => {
     if (event.key === "Backspace" && !pin[index] && index > 0) {
       inputRefs.current[index - 1].focus();
     }
   };
 
-  const fetchCaptainDetails = async (captainId) => {
-    if (!captainId) {
-      throw new Error("Captain ID is missing!");
-    }
-
+  // Fetch tables after PIN verification
+  const fetchTables = async (captainID) => {
     try {
-      const response = await fetch(`/api/get-captain-details?captainId=${captainId}`);
-      
+      const response = await fetch(`/api/get-captain-tables?captain=${captain}`);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to fetch captain details");
+        throw new Error("Could not fetch vectory data");
       }
-  
-      return await response.json();
-      
-    } catch (err) {
-      console.error("API Error:", err);
-      throw new Error(err.message || "Network request failed");
+
+      const data = await response.json();
+      setTables(data.tables); // ✅ Store tables in state
+    } catch (error) {
+      console.error("Error fetching tables:", error);
+      setError("Failed to fetch table data");
     }
   };
 
+  // Handle PIN verification
   const handleSubmit = async () => {
     const pinCode = pin.join("");
 
@@ -60,7 +59,7 @@ const Apktablet = () => {
     setError(null);
 
     try {
-      // Verify PIN and get captain ID
+      // ✅ Verify PIN
       const verifyResponse = await fetch("/api/verify-pin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -68,27 +67,22 @@ const Apktablet = () => {
       });
 
       const verifyData = await verifyResponse.json();
-      console.log("Verify API Response:", verifyData);
 
       if (!verifyResponse.ok) {
         throw new Error(verifyData.message || "Invalid PIN");
       }
 
-      console.log("Captain ID:", verifyData?.captain?._id);
-
-      if (!verifyData?.captain?._id) {
-        throw new Error("Captain ID is missing in response");
+      if (!verifyData?.captain) {
+        throw new Error("Captain information is missing in response");
       }
 
-      // Get captain details and tables
-      const { tables } = await fetchCaptainDetails(verifyData.captain._id);
-      
-      setCaptainInfo({
-        name: verifyData.captain.name,
-        tables: tables || []
-      });
-      
+      // ✅ Store Captain Info
+      const captain = verifyData.captain._id;
+      setCaptainInfo({ name: verifyData.captain.name, id: captain });
       setShowResult(true);
+
+      // ✅ Fetch tables using captain ID
+      fetchTables(captain);
     } catch (err) {
       setError(err.message || "Failed to connect to server");
       console.error("Error:", err);
@@ -97,10 +91,12 @@ const Apktablet = () => {
     }
   };
 
+  // Handle back button
   const handleBack = () => {
     setShowResult(false);
     setPin(["", "", "", ""]);
     setError(null);
+    setTables([]);
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
@@ -117,27 +113,16 @@ const Apktablet = () => {
             <h2>Welcome, {captainInfo.name}</h2>
             <p className="login-success">Successfully logged in</p>
           </div>
-          
-          <div className="tables-section">
-            <h3>Your Assigned Tables</h3>
-            {captainInfo.tables.length > 0 ? (
-              <div className="tables-grid">
-                {captainInfo.tables.map((table, index) => (
-                  <div key={index} className="table-card">
-                    <div className="table-header">
-                      <span className="table-name">{table.tableName}</span>
-                      <span className={`status-badge ${table.status}`}>
-                        {table.status}
-                      </span>
-                    </div>
-                    <div className="table-details">
-                      <span>Seats: {table.seatNumber}</span>
-                    </div>
-                  </div>
+          <div className="tables-list">
+            <h3>Tables Assigned:</h3>
+            {tables.length > 0 ? (
+              <ul>
+                {tables.map((table, index) => (
+                  <li key={index}>{table}</li>
                 ))}
-              </div>
+              </ul>
             ) : (
-              <p className="no-tables">No tables currently assigned</p>
+              <p>No tables found</p>
             )}
           </div>
         </div>
