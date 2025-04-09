@@ -1,7 +1,7 @@
 import connectDB from "../../app/lib/dbconnect";
 import Vectory from "../../models/vectory";
-import Captain from "../../models/hotelverter";
-import Table from "../../models/Table"; // Import the Table model
+import Captain from "../../models/hotelverter"; // Captain model
+import Table from "../../models/Table"; // Table model
 import mongoose from "mongoose";
 
 export default async function handler(req, res) {
@@ -18,23 +18,30 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
-    // Find the captain to ensure the ID is valid
+    // Find the captain using the provided ID
     const existingCaptain = await Captain.findById(captain);
     if (!existingCaptain) {
       return res.status(404).json({ message: "Captain not found" });
     }
 
-    // Find the vectory data for the given captain
+    // Fetch assigned tables from Vectory
     const vectoryData = await Vectory.findOne({ captain: new mongoose.Types.ObjectId(captain) }).select("tables");
 
-    if (!vectoryData || !vectoryData.tables.length) {
-      return res.status(200).json({ tables: [] });
+    if (!vectoryData || !vectoryData.tables || vectoryData.tables.length === 0) {
+      return res.status(200).json({ tables: [], message: "No tables assigned to this captain" });
     }
 
-    // Find table details
-    const tableDetails = await Table.find({ _id: { $in: vectoryData.tables } }).select("tableName seatNumber status");
+    // Fetch detailed table information using table names
+    const tables = await Table.find(
+      { tableName: { $in: vectoryData.tables } }, // Match tableName with tables array
+      "tableName seatNumber status" // Select only necessary fields
+    );
 
-    res.status(200).json({ tables: tableDetails });
+    if (!tables || tables.length === 0) {
+      return res.status(200).json({ tables: [], message: "Assigned tables not found in the database" });
+    }
+
+    res.status(200).json({ tables });
 
   } catch (error) {
     console.error("Error fetching tables:", error);

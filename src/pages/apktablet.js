@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const Apktablet = () => {
   const [pin, setPin] = useState(["", "", "", ""]);
@@ -37,7 +37,9 @@ const Apktablet = () => {
         throw new Error("Failed to fetch tables");
       }
       const data = await response.json();
-      setTables(data.tables);
+      console.log("Tables Data:", data);
+      
+      setTables(data.tables || []);
     } catch (error) {
       setError(error.message || "Failed to fetch table data");
     }
@@ -75,6 +77,7 @@ const Apktablet = () => {
       // Store Captain Info
       const captainId = verifyData.captain._id;
       setCaptainInfo({ name: verifyData.captain.name, id: captainId });
+      console.log("Captain Info Set:", verifyData.captain);
       setShowResult(true);
 
       // Fetch assigned tables
@@ -105,16 +108,16 @@ const Apktablet = () => {
             ⬅ Back
           </button>
           <div className="welcome-message">
-            <h2>Welcome, {captainInfo.name}</h2>
+            <h2>Welcome, {captainInfo?.name || "Captain"}</h2>
             <p className="login-success">Successfully logged in</p>
           </div>
           <div className="tables-list">
             <h3>Tables Assigned:</h3>
             {tables.length > 0 ? (
-              <ul>
+              <ul className="tables-list">
                 {tables.map((table, index) => (
-                  <li key={index}>
-                    <strong>{table.tableName}</strong> - Seats: {table.seatNumber} - Status: {table.status}
+                  <li key={index} className="table-item">
+                    <strong>{table.tableName}</strong> - {table.seatNumber} Seats ({table.status})
                   </li>
                 ))}
               </ul>
