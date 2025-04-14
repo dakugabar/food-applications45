@@ -146,7 +146,7 @@ const UpdatePopup = ({ table, onClose, onUpdate }) => {
   };
   
 
-  // Handle update order and send to the backend
+  
   const handleUpdateOrder = async () => {
     const updatedOrderData = {
       customerName,
