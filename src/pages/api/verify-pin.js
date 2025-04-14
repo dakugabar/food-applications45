@@ -1,7 +1,7 @@
-import  dbConnect from "../../app/lib/dbconnect";
+// /pages/api/captain/login.js
 
-import Captain from "../../models/hotelverter.js";
-
+import dbConnect from "../../app/lib/dbconnect";
+import Captain from "../../models/captain";
 
 export default async function handler(req, res) {
   await dbConnect();
@@ -13,19 +13,25 @@ export default async function handler(req, res) {
   try {
     const { pin } = req.body;
 
-    if (!pin) {
-      return res.status(400).json({ message: "PIN is required" });
+    if (!pin || !/^\d{4}$/.test(pin)) {
+      return res.status(400).json({ message: "Valid 4-digit PIN is required" });
     }
 
-    // Find captain by PIN
+    // Check if captain exists
     const captain = await Captain.findOne({ pin });
 
     if (!captain) {
       return res.status(404).json({ message: "Invalid PIN" });
     }
 
-    res.json({ captain: { _id: captain._id, name: captain.name } });
+    // Success
+    return res.status(200).json({
+      message: "Login successful",
+      captain: { _id: captain._id, name: captain.name }
+    });
+
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.error("Login error:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
   }
 }
