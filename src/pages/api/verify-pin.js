@@ -1,7 +1,8 @@
-// /pages/api/captain/login.js
+import  dbConnect from "../../app/lib/dbconnect";
 
-import dbConnect from "../../app/lib/dbconnect";
-import Captain from "../../models/captain";
+import Captain from "../../models/hotelverter.js";
+
+
 
 export default async function handler(req, res) {
   await dbConnect();
